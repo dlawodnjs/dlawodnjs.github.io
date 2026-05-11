@@ -27,9 +27,9 @@ window.menuData = {
     id: 'eumryosu',
     name: { ko: '음료수', en: 'Soft Drinks', ja: 'ソフトドリンク' },
     price: '2,000',
-    imageUrl: 'https://picsum.photos/seed/drink-soft/400/260',
+    imageUrl: 'photo/eumryosu.webp',
     desc: {
-      ko: '탄산음료 등 무알코올 음료입니다.',
+      ko: '탄산음료 등 무알코올 음료입니다.(콜라, 제로콜라, 사이다)',
       en: 'Non-alcoholic soft drinks such as sodas.',
       ja: 'コーラなどのノンアルコール飲料です。'
     }
