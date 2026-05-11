@@ -14,10 +14,10 @@ window.MENU_PLACEHOLDER_IMAGE = 'https://picsum.photos/seed/menu-placeholder/400
 window.menuData = {
   categories: [
     { id: 'seasonal menu',name: { ko: '계절 메뉴', en: 'seasonal menu', ja: '季節メニュー' } },
-    { id: 'dish',   name: { ko: '요리',     en: 'A la carte dishes',    ja: '一品料理' } },
+    { id: 'dish',   name: { ko: '요리',     en: 'Dishes',    ja: '一品料理' } },
     { id: 'meal',   name: { ko: '식사',     en: 'Noodles & rice dishes',ja: '麺類・ご飯もの' } },
-    { id: 'course', name: { ko: '코스 요리', en: 'Course menus',        ja: 'コース料理' } },
-    { id: 'drinks', name: { ko: '주류/음료', en: 'Alcohol & beverages', ja: '飲み物・お酒' } },
+    { id: 'course', name: { ko: '코스 요리', en: 'Set Courses',        ja: 'コース料理' } },
+    { id: 'drinks', name: { ko: '주류/음료', en: 'Drinks & Alcohol', ja: '飲み物・お酒' } },
   ],
 
   menu: {
