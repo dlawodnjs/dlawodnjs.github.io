@@ -275,9 +275,9 @@ window.menuData = {
       en: 'Premium Kinmen Kaoliang, large bottle — reserved for special occasions.',
       ja: 'プレミアム金門高粱酒の大瓶。特別な席におすすめです。'
     }
-  }
-]
-    {
+  },
+
+  {
   id: 'corkage',
   name: { ko: '콜키지 (병당)', en: 'Corkage (per bottle)', ja: 'コルケージ料（1本）' },
   price: '20,000',
@@ -287,7 +287,7 @@ window.menuData = {
     en: 'Corkage fee per bottle for bring-your-own wine or spirits.',
     ja: '持ち込みワイン・お酒1本につきのコルケージ料です。'
   }
-}
+}]
 ,
 
     // 2) 코스 요리
