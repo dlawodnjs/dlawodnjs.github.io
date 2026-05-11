@@ -276,7 +276,19 @@ window.menuData = {
       ja: 'プレミアム金門高粱酒の大瓶。特別な席におすすめです。'
     }
   }
-],
+]
+    {
+  id: 'corkage',
+  name: { ko: '콜키지 (병당)', en: 'Corkage (per bottle)', ja: 'コルケージ料（1本）' },
+  price: '20,000',
+  imageUrl: window.MENU_PLACEHOLDER_IMAGE,
+  desc: {
+    ko: '와인 및 주류 반입 시 병당 콜키지 요금입니다.',
+    en: 'Corkage fee per bottle for bring-your-own wine or spirits.',
+    ja: '持ち込みワイン・お酒1本につきのコルケージ料です。'
+  }
+}
+,
 
     // 2) 코스 요리
     course: [
