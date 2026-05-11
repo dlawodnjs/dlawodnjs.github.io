@@ -23,260 +23,214 @@ window.menuData = {
   menu: {
     // 1) 주류 / 음료
     drinks: [
-      {
-        id: 'eumryosu',
-        name: { ko: '음료수', en: 'Soft drink', ja: 'ソフトドリンク' },
-        price: '2,000',
-        imageUrl: 'https://picsum.photos/seed/drink-soft/400/260',
-        desc: {
-          ko: '탄산음료 등 무알코올 음료입니다.',
-          en: 'Non-alcoholic soft drinks such as sodas.',
-          ja: ''
-        }
-      },
-      {
-        id: 'soju',
-        name: { ko: '소주', en: 'Soju', ja: '焼酎（ソジュ）' },
-        price: '5,000',
-        imageUrl: 'https://picsum.photos/seed/soju/400/260',
-        desc: {
-          ko: '한국을 대표하는 증류식 또는 희석식 소주입니다.',
-          en: 'Korea’s representative distilled spirit, soju.',
-          ja: ''
-        }
-      },
-      {
-        id: 'beer',
-        name: { ko: '맥주', en: 'Beer', ja: 'ビール' },
-        price: '5,000',
-        imageUrl: 'https://picsum.photos/seed/beer/400/260',
-        desc: {
-          ko: '시원한 생맥주 또는 병맥주 한 잔.',
-          en: 'A glass of cold draft or bottled beer.',
-          ja: ''
-        }
-      },
-      {
-        id: 'igaoduju',
-        name: { ko: '이과두주', en: 'Erguotou (Chinese baijiu)', ja: '二鍋頭（中国白酒）' },
-        price: '6,000',
-        imageUrl: 'https://picsum.photos/seed/igaoduju/400/260',
-        desc: {
-          ko: '중국 북경 지역에서 즐겨 마시는 고도수 백주입니다.',
-          en: 'A strong Chinese baijiu commonly enjoyed around Beijing.',
-          ja: ''
-        }
-      },
-      {
-        id: 'cheongha',
-        name: { ko: '청하', en: 'Cheongha (mild rice wine)', ja: '清河（マイルドな韓国酒）' },
-        price: '6,000',
-        imageUrl: 'https://picsum.photos/seed/cheongha/400/260',
-        desc: {
-          ko: '부드럽고 깔끔한 맛의 청주 스타일 한국 술입니다.',
-          en: 'A smooth and clean-tasting Korean mild rice wine.',
-          ja: ''
-        }
-      },
-      {
-        id: 'tsingtao',
-        name: { ko: '칭따오맥주', en: 'Tsingtao Beer', ja: '青島ビール' },
-        price: '8,000',
-        imageUrl: 'https://picsum.photos/seed/tsingtao/400/260',
-        desc: {
-          ko: '중국 대표 라거 맥주 칭따오 병맥주입니다.',
-          en: 'A bottle of Tsingtao, the classic Chinese lager beer.',
-          ja: ''
-        }
-      },
-      {
-        id: 'goryangju',
-        name: { ko: '고량주', en: 'Chinese baijiu', ja: '高粱酒（中国白酒）' },
-        price: '8,000',
-        imageUrl: 'https://picsum.photos/seed/goryangju/400/260',
-        desc: {
-          ko: '고량을 발효해 만든 향이 진한 중국식 백주입니다.',
-          en: 'Fragrant Chinese baijiu made from sorghum.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gongbu-jayak',
-        name: { ko: '공부자약', en: 'Gongbu Jayak baijiu', ja: 'コンブジャヤク白酒' },
-        price: '80,000',
-        imageUrl: 'https://picsum.photos/seed/gongbujayak/400/260',
-        desc: {
-          ko: '풍부한 향과 깊은 맛이 특징인 프리미엄 고량주입니다.',
-          en: 'A premium style of Chinese baijiu with rich aroma and depth.',
-          ja: ''
-        }
-      },
-      {
-        id: 'ddidi',
-        name: { ko: '띠디(弟弟)', en: 'Didi baijiu', ja: 'ディディ白酒' },
-        price: '80,000',
-        imageUrl: 'https://picsum.photos/seed/ddidi/400/260',
-        desc: {
-          ko: '깔끔한 피니시가 특징인 중국 고량주 브랜드입니다.',
-          en: 'A Chinese baijiu brand with a clean, smooth finish.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yeontae-black',
-        name: { ko: '연태블랙', en: 'Yantai Black baijiu', ja: '煙台ブラック白酒' },
-        price: '55,000',
-        imageUrl: 'https://picsum.photos/seed/yeontaeblack/400/260',
-        desc: {
-          ko: '풍부한 향과 부드러운 목넘김의 연태 블랙 라벨 고량주입니다.',
-          en: 'Yantai Black label baijiu with rich aroma and smooth taste.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yeontae-so',
-        name: { ko: '연태고량주 (소)', en: 'Yantai baijiu (small)', ja: '煙台高粱酒（小）' },
-        price: '12,000',
-        imageUrl: 'https://picsum.photos/seed/yeontaeso/400/260',
-        desc: {
-          ko: '연태고량주 소 사이즈 병입니다.',
-          en: 'A small bottle of Yantai-style baijiu.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yeontae-jung',
-        name: { ko: '연태고량주 (중)', en: 'Yantai baijiu (medium)', ja: '煙台高粱酒（中）' },
-        price: '22,000',
-        imageUrl: 'https://picsum.photos/seed/yeontaejung/400/260',
-        desc: {
-          ko: '연태고량주 중간 사이즈 병입니다.',
-          en: 'A medium bottle of Yantai-style baijiu.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yeontae-dae',
-        name: { ko: '연태고량주 (대)', en: 'Yantai baijiu (large)', ja: '煙台高粱酒（大）' },
-        price: '41,000',
-        imageUrl: 'https://picsum.photos/seed/yeontaedae/400/260',
-        desc: {
-          ko: '연태고량주 대병으로 여럿이 함께 즐기기 좋습니다.',
-          en: 'A large bottle of Yantai-style baijiu for sharing.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gongbugaju-jung',
-        name: { ko: '공부가주 (중)', en: 'Gongbuga baijiu (medium)', ja: 'コンブカ酒（中）' },
-        price: '23,000',
-        imageUrl: 'https://picsum.photos/seed/gongbugaju1/400/260',
-        desc: {
-          ko: '중간 용량의 공부가주로 부담 없이 즐기기 좋습니다.',
-          en: 'Medium bottle of Gongbuga-style baijiu, good for casual drinking.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gongbugaju-dae',
-        name: { ko: '공부가주 (대)', en: 'Gongbuga baijiu (large)', ja: 'コンブカ酒（大）' },
-        price: '42,000',
-        imageUrl: 'https://picsum.photos/seed/gongbugaju2/400/260',
-        desc: {
-          ko: '대병 공부가주로 단체 모임에 어울립니다.',
-          en: 'Large bottle of Gongbuga-style baijiu for groups.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yanghadaegok-jung',
-        name: { ko: '양하대곡 (중)', en: 'Yangha Daegok (medium)', ja: '楊河大曲（中）' },
-        price: '45,000',
-        imageUrl: 'https://picsum.photos/seed/yangha1/400/260',
-        desc: {
-          ko: '향이 부드러운 양하대곡 중간 용량 제품입니다.',
-          en: 'Medium bottle of Yangha Daegok, a mild and aromatic baijiu.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yanghadaegok-dae',
-        name: { ko: '양하대곡 (대)', en: 'Yangha Daegok (large)', ja: '楊河大曲（大）' },
-        price: '60,000',
-        imageUrl: 'https://picsum.photos/seed/yangha2/400/260',
-        desc: {
-          ko: '풍부한 향의 양하대곡 대병입니다.',
-          en: 'Large bottle of Yangha Daegok with rich aroma.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gyeongju-dae',
-        name: { ko: '경주 (대)', en: 'Gyeongju baijiu (large)', ja: '慶州酒（大）' },
-        price: '60,000',
-        imageUrl: 'https://picsum.photos/seed/gyeongju/400/260',
-        desc: {
-          ko: '풍미가 깊은 경주 브랜드의 대병 고량주입니다.',
-          en: 'A large bottle of Gyeongju-brand baijiu with deep flavor.',
-          ja: ''
-        }
-      },
-      {
-        id: 'jukyeopcheongju-dae',
-        name: { ko: '죽엽청주 (대)', en: 'Bamboo leaf green wine (large)', ja: '竹葉青酒（大）' },
-        price: '70,000',
-        imageUrl: 'https://picsum.photos/seed/jukyeop/400/260',
-        desc: {
-          ko: '죽엽 향을 입힌 전통 청주 스타일의 술입니다.',
-          en: 'A traditional green rice wine infused with bamboo leaves.',
-          ja: ''
-        }
-      },
-      {
-        id: 'geumhwa-jung',
-        name: { ko: '금화천진 (중)', en: 'Geumhwa Tianjin (medium)', ja: '金華天津酒（中）' },
-        price: '40,000',
-        imageUrl: 'https://picsum.photos/seed/geumhwa1/400/260',
-        desc: {
-          ko: '은은한 향의 금화천진 중간 용량 제품입니다.',
-          en: 'Medium bottle of Geumhwa Tianjin with gentle aroma.',
-          ja: ''
-        }
-      },
-      {
-        id: 'geumhwa-dae',
-        name: { ko: '금화천진 (대)', en: 'Geumhwa Tianjin (large)', ja: '金華天津酒（大）' },
-        price: '60,000',
-        imageUrl: 'https://picsum.photos/seed/geumhwa2/400/260',
-        desc: {
-          ko: '단체 모임에 적합한 금화천진 대병입니다.',
-          en: 'Large bottle of Geumhwa Tianjin, ideal for groups.',
-          ja: ''
-        }
-      },
-      {
-        id: 'geummun-jung',
-        name: { ko: '금문고량주 (중)', en: 'Kinmen Kaoliang (medium)', ja: '金門高粱酒（中）' },
-        price: '80,000',
-        imageUrl: 'https://picsum.photos/seed/geummun1/400/260',
-        desc: {
-          ko: '대만산 금문고량주 중간 용량으로 향이 매우 진합니다.',
-          en: 'Medium bottle of Taiwanese Kinmen Kaoliang with intense aroma.',
-          ja: ''
-        }
-      },
-      {
-        id: 'geummun-dae',
-        name: { ko: '금문고량주 (대)', en: 'Kinmen Kaoliang (large)', ja: '金門高粱酒（大）' },
-        price: '150,000',
-        imageUrl: 'https://picsum.photos/seed/geummun2/400/260',
-        desc: {
-          ko: '프리미엄 금문고량주 대병으로 특별한 자리에 추천합니다.',
-          en: 'Premium large bottle of Kinmen Kaoliang for special occasions.',
-          ja: ''
-        }
-      }
-    ],
+  {
+    id: 'eumryosu',
+    name: { ko: '음료수', en: 'Soft Drinks', ja: 'ソフトドリンク' },
+    desc: {
+      ko: '탄산음료 등 무알코올 음료입니다.',
+      en: 'Non-alcoholic soft drinks such as sodas.',
+      ja: 'コーラなどのノンアルコール飲料です。'
+    }
+  },
+  {
+    id: 'soju',
+    name: { ko: '소주', en: 'Soju', ja: '焼酎（ソジュ）' },
+    desc: {
+      ko: '한국을 대표하는 증류식 또는 희석식 소주입니다.',
+      en: "Korea's iconic distilled spirit, clean and crisp.",  // ✏️ "representative" → 더 자연스러운 표현
+      ja: '韓国を代表する蒸留酒・焼酎です。'
+    }
+  },
+  {
+    id: 'beer',
+    name: { ko: '맥주', en: 'Beer', ja: 'ビール' },
+    desc: {
+      ko: '시원한 생맥주 또는 병맥주 한 잔.',
+      en: 'Cold draft or bottled beer.',  // ✏️ "A glass of" 제거 — 간결하게
+      ja: '冷たい生ビールまたは瓶ビール。'
+    }
+  },
+  {
+    id: 'igaoduju',
+    name: { ko: '이과두주', en: 'Erguotou', ja: '二鍋頭' },  // ✏️ "(Chinese baijiu)" 제거 — 설명은 desc에서
+    desc: {
+      ko: '중국 북경 지역에서 즐겨 마시는 고도수 백주입니다.',
+      en: 'A high-proof Chinese baijiu beloved in Beijing.',  // ✏️ "commonly enjoyed around" → 간결하게
+      ja: '北京で愛される高アルコールの中国白酒です。'
+    }
+  },
+  {
+    id: 'cheongha',
+    name: { ko: '청하', en: 'Cheongha', ja: '清河' },  // ✏️ "(mild rice wine)" → desc으로 이동
+    desc: {
+      ko: '부드럽고 깔끔한 맛의 청주 스타일 한국 술입니다.',
+      en: 'A light and smooth Korean rice wine with a clean finish.',  // ✏️ 더 자연스럽게
+      ja: 'すっきりとした味わいの韓国清酒スタイルのお酒です。'
+    }
+  },
+  {
+    id: 'tsingtao',
+    name: { ko: '칭따오맥주', en: 'Tsingtao Beer', ja: '青島ビール' },
+    desc: {
+      ko: '중국 대표 라거 맥주 칭따오 병맥주입니다.',
+      en: "China's iconic lager, served in a bottle.",  // ✏️ 자연스럽게
+      ja: '中国を代表するラガービール、青島ビールの瓶です。'
+    }
+  },
+  {
+    id: 'goryangju',
+    name: { ko: '고량주', en: 'Baijiu', ja: '高粱酒' },  // ✏️ "Chinese baijiu" → "Baijiu" (이미 중국술 맥락)
+    desc: {
+      ko: '고량을 발효해 만든 향이 진한 중국식 백주입니다.',
+      en: 'Aromatic Chinese spirit distilled from sorghum.',  // ✏️ "Fragrant" → "Aromatic" (더 고급스러운 표현)
+      ja: 'コーリャンから作られた香り豊かな中国白酒です。'
+    }
+  },
+  {
+    id: 'gongbu-jayak',
+    name: { ko: '공부자약', en: 'Confucius Family Liquor', ja: '孔府家酒' },  // ✏️ 브랜드 정식 영문명 사용
+    desc: {
+      ko: '풍부한 향과 깊은 맛이 특징인 프리미엄 고량주입니다.',
+      en: 'Premium baijiu with a rich aroma and complex depth.',
+      ja: '豊かな香りと深い味わいが特徴のプレミアム白酒です。'
+    }
+  },
+  {
+    id: 'ddidi',
+    name: { ko: '띠디(弟弟)', en: 'Didi Baijiu', ja: '弟弟白酒' },  // ✏️ 한자 병기
+    desc: {
+      ko: '깔끔한 피니시가 특징인 중국 고량주 브랜드입니다.',
+      en: 'A Chinese baijiu known for its clean, smooth finish.',
+      ja: 'すっきりとしたキレが特徴の中国白酒ブランドです。'
+    }
+  },
+  {
+    id: 'yeontae-black',
+    name: { ko: '연태블랙', en: 'Yantai Black', ja: '煙台ブラック' },  // ✏️ "baijiu" 제거 — 시리즈 통일
+    desc: {
+      ko: '풍부한 향과 부드러운 목넘김의 연태 블랙 라벨 고량주입니다.',
+      en: 'Yantai Black Label baijiu — rich aroma, silky smooth.',  // ✏️ 더 임팩트 있게
+      ja: '豊かな香りとなめらかな口当たりの煙台ブラックラベル白酒です。'
+    }
+  },
+  {
+    id: 'yeontae-so',
+    name: { ko: '연태고량주 (소)', en: 'Yantai Baijiu (S)', ja: '煙台高粱酒（小）' },  // ✏️ small → S (메뉴판 관례)
+    desc: {
+      ko: '연태고량주 소 사이즈 병입니다.',
+      en: 'Yantai-style baijiu, small bottle.',
+      ja: '煙台高粱酒の小瓶です。'
+    }
+  },
+  {
+    id: 'yeontae-jung',
+    name: { ko: '연태고량주 (중)', en: 'Yantai Baijiu (M)', ja: '煙台高粱酒（中）' },
+    desc: {
+      ko: '연태고량주 중간 사이즈 병입니다.',
+      en: 'Yantai-style baijiu, medium bottle.',
+      ja: '煙台高粱酒の中瓶です。'
+    }
+  },
+  {
+    id: 'yeontae-dae',
+    name: { ko: '연태고량주 (대)', en: 'Yantai Baijiu (L)', ja: '煙台高粱酒（大）' },
+    desc: {
+      ko: '연태고량주 대병으로 여럿이 함께 즐기기 좋습니다.',
+      en: 'Yantai-style baijiu, large bottle — great for sharing.',
+      ja: '煙台高粱酒の大瓶。みんなでシェアするのにぴったりです。'
+    }
+  },
+  {
+    id: 'gongbugaju-jung',
+    name: { ko: '공부가주 (중)', en: 'Gongbuga Baijiu (M)', ja: '孔府家酒（中）' },  // ✏️ 한자 정식 표기
+    desc: {
+      ko: '중간 용량의 공부가주로 부담 없이 즐기기 좋습니다.',
+      en: 'Gongbuga-style baijiu, medium bottle — easy to enjoy.',
+      ja: '気軽に楽しめる孔府家酒の中瓶です。'
+    }
+  },
+  {
+    id: 'gongbugaju-dae',
+    name: { ko: '공부가주 (대)', en: 'Gongbuga Baijiu (L)', ja: '孔府家酒（大）' },
+    desc: {
+      ko: '대병 공부가주로 단체 모임에 어울립니다.',
+      en: 'Gongbuga-style baijiu, large bottle — perfect for groups.',
+      ja: '大人数の席にぴったりな孔府家酒の大瓶です。'
+    }
+  },
+  {
+    id: 'yanghadaegok-jung',
+    name: { ko: '양하대곡 (중)', en: 'Yanghe Daqu (M)', ja: '洋河大曲（中）' },  // ✏️ 브랜드 정식 영문명 "Yanghe Daqu"
+    desc: {
+      ko: '향이 부드러운 양하대곡 중간 용량 제품입니다.',
+      en: 'Yanghe Daqu baijiu, medium bottle — mellow and aromatic.',
+      ja: 'まろやかな香りの洋河大曲、中瓶です。'
+    }
+  },
+  {
+    id: 'yanghadaegok-dae',
+    name: { ko: '양하대곡 (대)', en: 'Yanghe Daqu (L)', ja: '洋河大曲（大）' },
+    desc: {
+      ko: '풍부한 향의 양하대곡 대병입니다.',
+      en: 'Yanghe Daqu baijiu, large bottle — fragrant and full-bodied.',
+      ja: '香り豊かな洋河大曲の大瓶です。'
+    }
+  },
+  {
+    id: 'gyeongju-dae',
+    name: { ko: '경주 (대)', en: 'Gyeongju Baijiu (L)', ja: '慶州酒（大）' },
+    desc: {
+      ko: '풍미가 깊은 경주 브랜드의 대병 고량주입니다.',
+      en: 'Gyeongju-brand baijiu, large bottle — bold and flavorful.',
+      ja: '深い風味の慶州ブランド白酒の大瓶です。'
+    }
+  },
+  {
+    id: 'jukyeopcheongju-dae',
+    name: { ko: '죽엽청주 (대)', en: 'Zhuyeqing (L)', ja: '竹葉青酒（大）' },  // ✏️ 정식 브랜드명 사용
+    desc: {
+      ko: '죽엽 향을 입힌 전통 청주 스타일의 술입니다.',
+      en: 'A traditional Chinese liqueur infused with bamboo leaves.',  // ✏️ "green rice wine" → liqueur (더 정확)
+      ja: '竹の葉を漬け込んだ伝統的な中国薬味酒です。'
+    }
+  },
+  {
+    id: 'geumhwa-jung',
+    name: { ko: '금화천진 (중)', en: 'Jinhua Tianjin (M)', ja: '金華天津酒（中）' },  // ✏️ 표준 로마자 표기
+    desc: {
+      ko: '은은한 향의 금화천진 중간 용량 제품입니다.',
+      en: 'Jinhua Tianjin baijiu, medium bottle — subtle and fragrant.',
+      ja: 'ほのかな香りの金華天津酒の中瓶です。'
+    }
+  },
+  {
+    id: 'geumhwa-dae',
+    name: { ko: '금화천진 (대)', en: 'Jinhua Tianjin (L)', ja: '金華天津酒（大）' },
+    desc: {
+      ko: '단체 모임에 적합한 금화천진 대병입니다.',
+      en: 'Jinhua Tianjin baijiu, large bottle — ideal for groups.',
+      ja: '宴会にぴったりな金華天津酒の大瓶です。'
+    }
+  },
+  {
+    id: 'geummun-jung',
+    name: { ko: '금문고량주 (중)', en: 'Kinmen Kaoliang (M)', ja: '金門高粱酒（中）' },
+    desc: {
+      ko: '대만산 금문고량주 중간 용량으로 향이 매우 진합니다.',
+      en: 'Taiwanese Kinmen Kaoliang, medium bottle — bold and intensely aromatic.',
+      ja: '台湾産の金門高粱酒、中瓶。非常に香り高い一本です。'
+    }
+  },
+  {
+    id: 'geummun-dae',
+    name: { ko: '금문고량주 (대)', en: 'Kinmen Kaoliang (L)', ja: '金門高粱酒（大）' },
+    desc: {
+      ko: '프리미엄 금문고량주 대병으로 특별한 자리에 추천합니다.',
+      en: 'Premium Kinmen Kaoliang, large bottle — reserved for special occasions.',
+      ja: 'プレミアム金門高粱酒の大瓶。特別な席におすすめです。'
+    }
+  }
+],
 
     // 2) 코스 요리
     course: [
