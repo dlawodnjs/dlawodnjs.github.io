@@ -234,51 +234,51 @@ window.menuData = {
 
     // 2) 코스 요리
     course: [
-      {
-        id: 'course-a',
-        name: { ko: 'A코스', en: 'Course A', ja: 'Aコース' },
-        price: '32,000',
-        imageUrl: 'https://picsum.photos/seed/courseA/400/260',
-        desc: {
-          ko: '오향장육, 계살 단호박 스프, 유산슬, 칠리새우, 탕수육, 식사, 디저트 (1인).',
-          en: 'Five-spice sliced pork, chicken & pumpkin soup, seafood yusanseul, chili shrimp, sweet and sour pork, rice or noodles, and dessert (per person).',
-          ja: ''
-        }
-      },
-      {
-        id: 'course-b',
-        name: { ko: 'B코스', en: 'Course B', ja: 'Bコース' },
-        price: '40,000',
-        imageUrl: 'https://picsum.photos/seed/courseB/400/260',
-        desc: {
-          ko: '양장피, 해물누룽지탕, 향라두치새우, 유림기, 흑후추 안심, 꽃빵, 식사, 디저트 (1인).',
-          en: 'Yangjangpi cold platter, seafood sizzling rice soup, spicy shrimp, yuringi fried chicken, black pepper tenderloin, steamed buns, main dish, and dessert (per person).',
-          ja: ''
-        }
-      },
-      {
-        id: 'course-c',
-        name: { ko: 'C코스', en: 'Course C', ja: 'Cコース' },
-        price: '52,000',
-        imageUrl: 'https://picsum.photos/seed/courseC/400/260',
-        desc: {
-          ko: '냉채, 전가복, 깐풍새우, 어향생선, 동파육, 꽃빵, 식사, 디저트 (1인).',
-          en: 'Assorted cold appetizer, deluxe seafood & meat (Jeongabok), spicy fried shrimp, fish in garlic sauce, Dongpo braised pork, buns, main dish, and dessert (per person).',
-          ja: ''
-        }
-      },
-      {
-        id: 'course-d',
-        name: { ko: 'D코스', en: 'Course D', ja: 'Dコース' },
-        price: '68,000',
-        imageUrl: 'https://picsum.photos/seed/courseD/400/260',
-        desc: {
-          ko: '냉채, 계살단호박 산슬어초, 일품 해삼, 글소스 통전복, 크림새우, 어향삼겹살, 꽃빵, 식사, 디저트 (1인).',
-          en: 'Cold appetizer, chicken & pumpkin yusanseul, premium sea cucumber, whole abalone in brown sauce, cream shrimp, pork belly in garlic sauce, buns, main dish, and dessert (per person).',
-          ja: ''
-        }
-      }
-    ],
+  {
+    id: 'course-a',
+    name: { ko: 'A코스', en: 'Course A', ja: 'Aコース' },
+    price: '32,000',
+    imageUrl: 'https://picsum.photos/seed/courseA/400/260',
+    desc: {
+      ko: '오향장육, 계살 단호박 스프, 유산슬, 칠리새우, 탕수육, 식사, 디저트 (1인).',
+      en: 'Five-spice sliced pork, chicken & pumpkin soup, yusanseul (stir-fried seafood and vegetables), chili shrimp, sweet and sour pork, rice or noodles, and dessert (per person).',
+      ja: '五香チャーシュー、鶏肉とかぼちゃのスープ、ユサンスル（海鮮と野菜のとろみ炒め）、チリエビ、酢豚、ご飯または麺、デザートの１人用コースです。'
+    }
+  },
+  {
+    id: 'course-b',
+    name: { ko: 'B코스', en: 'Course B', ja: 'Bコース' },
+    price: '40,000',
+    imageUrl: 'https://picsum.photos/seed/courseB/400/260',
+    desc: {
+      ko: '양장피, 해물누룽지탕, 향라두치새우, 유림기, 흑후추 안심, 꽃빵, 식사, 디저트 (1인).',
+      en: 'Yangjangpi cold platter, seafood sizzling rice soup, spicy stir-fried shrimp, yuringi fried chicken, black pepper beef tenderloin, steamed buns, main dish, and dessert (per person).',
+      ja: 'ヤンジャンピ冷菜、海鮮おこげスープ、ピリ辛エビ炒め、油淋鶏、黒胡椒牛ヒレ炒め、花巻、ご飯または麺、デザートの１人用コースです。'
+    }
+  },
+  {
+    id: 'course-c',
+    name: { ko: 'C코스', en: 'Course C', ja: 'Cコース' },
+    price: '52,000',
+    imageUrl: 'https://picsum.photos/seed/courseC/400/260',
+    desc: {
+      ko: '냉채, 전가복, 깐풍새우, 어향생선, 동파육, 꽃빵, 식사, 디저트 (1인).',
+      en: 'Assorted cold appetizer, jeongabok deluxe seafood and meat, spicy fried shrimp, fish in garlic sauce, Dongpo pork (braised pork belly), buns, main dish, and dessert (per person).',
+      ja: '前菜盛り合わせ、ジョンガボク（海鮮と肉の豪華炒め）、ピリ辛エビ揚げ、魚のガーリックソース、東坡肉（豚バラ煮込み）、花巻、ご飯または麺、デザートの１人用コースです。'
+    }
+  },
+  {
+    id: 'course-d',
+    name: { ko: 'D코스', en: 'Course D', ja: 'Dコース' },
+    price: '68,000',
+    imageUrl: 'https://picsum.photos/seed/courseD/400/260',
+    desc: {
+      ko: '냉채, 계살단호박 산슬어초, 일품 해삼, 굴소스 통전복, 크림새우, 어향삼겹살, 꽃빵, 식사, 디저트 (1인).',
+      en: 'Cold appetizer, chicken & pumpkin yusanseul, premium sea cucumber dish, whole abalone in oyster sauce, cream shrimp, pork belly in garlic sauce, buns, main dish, and dessert (per person).',
+      ja: '前菜盛り合わせ、鶏肉とかぼちゃのユサンスル、特製ナマコ料理、丸ごとアワビのオイスターソース、クリームエビ、豚バラのガーリックソース炒め、花巻、ご飯または麺、デザートの１人用コースです。'
+    }
+  }
+],
 
     // 3) 중새우 및 고기 요리
     dish: [
