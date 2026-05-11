@@ -742,7 +742,7 @@ window.menuData = {
       },
       {
         id: 'yuksong-jjambbong',
-        name: { ko: '육송짬뽕', en: 'Beef jjambbong', ja: '牛肉チャンポン' },
+        name: { ko: '육슬짬뽕', en: 'Beef jjambbong', ja: '牛肉チャンポン' },
         price: '10,000',
         imageUrl: 'https://picsum.photos/seed/yuksong/400/260',
         desc: {
@@ -786,12 +786,12 @@ window.menuData = {
       },
       {
         id: 'sin-ramyeon',
-        name: { ko: '신라면', en: 'Shin Ramyun', ja: '辛ラーメン' },
+        name: { ko: '신락면', en: 'Shin Ramyun', ja: '辛ラーメン' },
         price: '11,000',
         imageUrl: 'https://picsum.photos/seed/sinramyeon/400/260',
         desc: {
-          ko: '한국에서 인기 있는 인스턴트 라면을 식당 스타일로 제공합니다.',
-          en: 'Popular Korean instant noodles served restaurant-style.',
+          ko: '',
+          en: '',
           ja: ''
         }
       },
