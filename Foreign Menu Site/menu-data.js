@@ -38,7 +38,7 @@ window.menuData = {
     id: 'soju',
     name: { ko: '소주', en: 'Soju', ja: '焼酎（ソジュ）' },
     price: '5,000',
-    imageUrl: 'https://picsum.photos/seed/soju/400/260',
+    imageUrl: 'photo/soju.jpg',
     desc: {
       ko: '한국을 대표하는 증류식 또는 희석식 소주입니다.',
       en: "Korea's iconic distilled spirit, clean and crisp.",
