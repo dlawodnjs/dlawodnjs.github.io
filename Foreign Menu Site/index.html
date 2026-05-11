@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>다국어 메뉴판 · 고객 화면</title>
+  <style>
+    /* ===== Design tokens ===== */
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-soft: rgba(255,255,255,0.95);
+      --border: #e0e0e6;
+      --accent: #01696f;
+      --accent-soft: #e0f1f2;
+      --text: #222222;
+      --text-muted: #666666;
+      --radius-sm: 10px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.05);
+      --shadow-pop: 0 18px 50px rgba(15, 23, 42, 0.07);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: radial-gradient(circle at top, #fdfdfd, #ececf4);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== Header ===== */
+    header {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 20px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: 18px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .logo:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+      border-radius: var(--radius-sm);
+    }
+    .logo-mark {
+      width: 60px;
+      height: 25px;
+      border-radius: 10px;
+      background: conic-gradient(from 180deg at 50% 50%, #33c5d1, #01696f, #2b8790);
+    }
+    .lang-selector {
+      display: flex;
+      gap: 6px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 999px;
+      padding: 3px;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: var(--shadow-pop);
+    }
+    .lang-btn {
+      border-radius: 999px;
+      border: none;
+      padding: 6px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font: inherit;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .lang-btn[aria-pressed="true"] {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    /* ===== Main / Hero ===== */
+    main {
+      max-width: 1120px;
+      margin: 0 auto 40px;
+      padding: 0 20px 30px;
+    }
+    .hero {
+      margin-top: 4px;
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+    }
+    .hero-card {
+      background: var(--surface-soft);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: var(--shadow-pop);
+    }
+    .hero-title {
+      font-size: 22px;
+      margin: 0 0 4px;
+      line-height: 1.35;
+    }
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0 0 14px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .pill {
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 11px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.9);
+      color: var(--text-muted);
+    }
+    .hero-visual {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      min-height: 200px;
+      background: radial-gradient(circle at 20% 0%, #ffe1d2, #f5f5f7);
+      border: 1px solid rgba(0,0,0,0.04);
+      box-shadow: var(--shadow-pop);
+    }
+    .hero-visual-inner {
+      position: absolute;
+      inset: 10px;
+      border-radius: 14px;
+      background-image: url('photo/benner.jpeg');
+      background-size: cover;
+      background-position: center;
+      filter: saturate(1.1);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: auto 10px 10px 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 11px;
+      backdrop-filter: blur(12px);
+    }
+
+    .notice {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* ===== Category & cards ===== */
+    .category-section { margin-top: 18px; }
+    .category-title {
+      margin: 16px 0 10px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .category-title h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .lang-tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.9);
+      color: var(--text-muted);
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .menu-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      min-height: 230px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .menu-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-pop);
+    }
+    .menu-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      background: #ddd;
+      display: block;
+    }
+    .menu-card-body {
+      padding: 11px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      flex: 1;
+    }
+    .menu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .menu-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .menu-card-price {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .menu-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button class="logo" id="secretAdminTrigger" type="button" aria-label="다국어 메뉴판">
+  <div class="logo-mark" aria-hidden="true">
+    <img src="photo/logo.jpeg" 
+         alt="신락원 로고" 
+         style="width:110%; height:auto; object-fit:cover; border-radius:10%;">
+  </div>
+ 
+</button>
+    <div class="lang-selector" role="group" aria-label="언어 선택">
+      <button class="lang-btn" data-lang="ko" aria-pressed="true">🇰🇷 한국어</button>
+      <button class="lang-btn" data-lang="en" aria-pressed="false">🇺🇸 English</button>
+      <button class="lang-btn" data-lang="ja" aria-pressed="false">🇯🇵 日本語</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="소개">
+      <div class="hero-card">
+        <p class="hero-sub" id="subtitle">
+          subtitle
+        </p>
+        <h1 class="hero-title" id="heroTitle">maintitle</h1>
+        <div class="pill-row">
+          <span class="pill" id="pill1">pill1</span>
+          <span class="pill" id="pill2">pill2</span>
+          <span class="pill" id="pill3">pill3</span>
+        </div>
+        <p class="notice" id="noticeText">※ 화면에 보이는 메뉴는 샘플 데이터이며, 실제 매장 상황에 맞게 구성할 수 있습니다.</p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-inner"></div>
+        <div class="hero-overlay">
+          <span id="heroOverlayText">언어를 선택해보세요</span>
+        </div>
+      </div>
+    </section>
+
+    <div id="menuContainer" aria-live="polite"></div>
+  </main>
+
+  <!-- 메뉴 데이터: window.menuData / window.MENU_PLACEHOLDER_IMAGE 노출 -->
+  <script src="./menu-data.js"></script>
+  <script>
+    /**
+     * Customer view
+     * - currentLang 상태에 따라 카테고리 / 카드 다시 렌더.
+     * - 다국어 텍스트는 ko -> 선택언어 fallback 으로 안전하게 처리.
+     */
+
+    // 화면 정적 텍스트 (헤더 / hero) 다국어
+    const i18nTexts = {
+      ko: {
+        subtitle: '부제목',
+        heroTitle: '제목',
+        pill1: '설명1',
+        pill2: '설명2',
+        pill3: '설명3',
+        noticeText: '※ 화면에 보이는 메뉴는 샘플 데이터이며, 실제 매장 상황에 맞게 구성할 수 있습니다.',
+        overlay: '언어를 선택해보세요',
+        langLabel: '현재 언어 기준 설명',
+        priceUnit: '원'
+      },
+      en: {
+        subtitle: 'A digital menu that lets guests view dishes in the language they feel most comfortable with.',
+        heroTitle: 'Choose a language and all menu descriptions will update instantly.',
+        pill1: 'One store, many languages',
+        pill2: 'Photos + price + description',
+        pill3: 'Organized by category',
+        noticeText: '* The menu items are sample data. You can customize them for your store.',
+        overlay: 'Tap a card to see details',
+        langLabel: 'Description in selected language',
+        priceUnit: ' KRW'
+      },
+      ja: {
+        subtitle: 'お客様が一番読みやすい言語でメニューを確認できるデジタルメニューです。',
+        heroTitle: '言語を選ぶと、メニューの説明がすべてその言語に切り替わります。',
+        pill1: '一つの店舗で多言語対応',
+        pill2: '写真 + 価格 + 説明',
+        pill3: 'カテゴリごとに整理',
+        noticeText: '※ 表示されているメニューはサンプルです。店舗に合わせて自由に編集できます。',
+        overlay: '言語を切り替えてみましょう',
+        langLabel: '選択した言語での説明',
+        priceUnit: ' KRW'
+      }
+    };
+
+    // 상태: 현재 언어
+    let currentLang = 'ko';
+
+    // 메뉴 데이터: 서버 API 우선, 실패하면 menu-data.js 의 기본 데이터 사용.
+    let menuData = window.menuData || { categories: [], menu: {} };
+    const PLACEHOLDER = window.MENU_PLACEHOLDER_IMAGE
+      || 'https://picsum.photos/seed/menu-placeholder/400/260';
+
+    // DOM refs
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const menuContainer = document.getElementById('menuContainer');
+
+    // 로컬에서는 같은 origin, 배포 환경에서는 Perplexity 포트 프록시를 사용.
+    const API_BASE = location.hostname === 'localhost' || location.protocol === 'file:'
+      ? ''
+      : 'port/5000';
+
+    function apiUrl(path) {
+      return API_BASE + path;
+    }
+
+    /**
+     * 다국어 객체에서 언어 선택 + ko fallback.
+     * obj 가 없거나 비어있을 때도 안전하게 빈 문자열 반환.
+     */
+    function pickLang(obj, lang) {
+      if (!obj) return '';
+      const v = obj[lang];
+      if (v && v.trim()) return v;
+      return obj.ko || '';
+    }
+
+    /** 서버에서 최신 메뉴 데이터를 가져온다. 로컬 파일로 열면 fallback 데이터가 사용된다. */
+    async function loadMenuData() {
+      try {
+        const res = await fetch(apiUrl('/api/menu'), { headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error('API 응답 오류');
+        menuData = await res.json();
+      } catch (error) {
+        console.info('API를 사용할 수 없어 menu-data.js 기본 데이터를 사용합니다.', error);
+        menuData = window.menuData || { categories: [], menu: {} };
+      }
+    }
+
+    /** 정적 텍스트(헤더/hero) 갱신 */
+    function renderTexts() {
+      const t = i18nTexts[currentLang];
+      document.documentElement.lang = currentLang;
+      document.getElementById('subtitle').textContent = t.subtitle;
+      document.getElementById('heroTitle').textContent = t.heroTitle;
+      document.getElementById('pill1').textContent = t.pill1;
+      document.getElementById('pill2').textContent = t.pill2;
+      document.getElementById('pill3').textContent = t.pill3;
+      document.getElementById('noticeText').textContent = t.noticeText;
+      document.getElementById('heroOverlayText').textContent = t.overlay;
+    }
+
+    /** 카테고리 + 카드 모두 렌더 */
+    function renderMenu() {
+      menuContainer.innerHTML = '';
+      const t = i18nTexts[currentLang];
+
+      menuData.categories.forEach(cat => {
+        const items = menuData.menu[cat.id] || [];
+        if (items.length === 0) return; // 빈 카테고리는 스킵
+
+        const section = document.createElement('section');
+        section.className = 'category-section';
+
+        // 카테고리 헤더
+        const titleRow = document.createElement('div');
+        titleRow.className = 'category-title';
+
+        const title = document.createElement('h2');
+        title.textContent = pickLang(cat.name, currentLang);
+
+        const langTag = document.createElement('span');
+        langTag.className = 'lang-tag';
+        langTag.textContent = t.langLabel;
+
+        titleRow.appendChild(title);
+        titleRow.appendChild(langTag);
+
+        // 카드 그리드
+        const grid = document.createElement('div');
+        grid.className = 'menu-grid';
+
+        items.forEach(item => {
+          grid.appendChild(renderCard(item, t));
+        });
+
+        section.appendChild(titleRow);
+        section.appendChild(grid);
+        menuContainer.appendChild(section);
+      });
+    }
+
+    /** 단일 메뉴 카드 element 생성 */
+    function renderCard(item, t) {
+      const card = document.createElement('article');
+      card.className = 'menu-card';
+
+      const displayName = pickLang(item.name, currentLang);
+      const displayDesc = pickLang(item.desc, currentLang);
+
+      // 사진
+      const img = document.createElement('img');
+      img.src = item.imageUrl || PLACEHOLDER;
+      img.alt = displayName;
+      img.loading = 'lazy';
+      // 이미지 로드 실패시 placeholder 로 폴백
+      img.addEventListener('error', () => { img.src = PLACEHOLDER; }, { once: true });
+
+      // 본문
+      const body = document.createElement('div');
+      body.className = 'menu-card-body';
+
+      const header = document.createElement('div');
+      header.className = 'menu-card-header';
+
+      const nameEl = document.createElement('h3');
+      nameEl.className = 'menu-card-name';
+      nameEl.textContent = displayName;
+
+      const priceEl = document.createElement('span');
+      priceEl.className = 'menu-card-price';
+      priceEl.textContent = item.price + t.priceUnit;
+
+      header.appendChild(nameEl);
+      header.appendChild(priceEl);
+
+      const descEl = document.createElement('p');
+      descEl.className = 'menu-card-desc';
+      descEl.textContent = displayDesc;
+
+      body.appendChild(header);
+      if (displayDesc) body.appendChild(descEl);
+
+      card.appendChild(img);
+      card.appendChild(body);
+      return card;
+    }
+
+    /** 언어 버튼 클릭 핸들러 */
+    function setLanguage(lang) {
+      if (!i18nTexts[lang]) return;
+      currentLang = lang;
+      langButtons.forEach(b => {
+        const isActive = b.getAttribute('data-lang') === lang;
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+      renderTexts();
+      renderMenu();
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+
+    /**
+     * 숨은 관리자 진입:
+     * 로고의 "다국어 메뉴판" 영역을 짧은 시간 안에 5번 누르면 admin.html 로 이동.
+     */
+    let secretClickCount = 0;
+    let secretClickTimer = null;
+    document.getElementById('secretAdminTrigger').addEventListener('click', () => {
+      secretClickCount += 1;
+      clearTimeout(secretClickTimer);
+      secretClickTimer = setTimeout(() => { secretClickCount = 0; }, 1800);
+      if (secretClickCount >= 5) {
+        window.location.href = './admin.html';
+      }
+    });
+
+    // 초기 렌더
+    loadMenuData().then(() => {
+      renderTexts();
+      renderMenu();
+    });
+  </script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>

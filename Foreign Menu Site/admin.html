@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>다국어 메뉴판 · 관리자</title>
+  <style>
+    /* ===== Design tokens ===== */
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --border: #e0e0e6;
+      --accent: #01696f;
+      --accent-soft: #e0f1f2;
+      --danger: #b54545;
+      --text: #222222;
+      --text-muted: #666666;
+      --radius-sm: 8px;
+      --radius-md: 10px;
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== Header ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(245,245,247,0.9);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: radial-gradient(circle at 30% 0%, #33c5d1, #01696f);
+    }
+    .header-note {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ===== Layout ===== */
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 24px;
+    }
+    @media (max-width: 980px) {
+      main { grid-template-columns: minmax(0, 1fr); }
+    }
+    section {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 20px 18px;
+      box-shadow: var(--shadow-card);
+    }
+    section + section { margin-top: 0; }
+    .col { display: flex; flex-direction: column; gap: 24px; }
+
+    h1 { font-size: 18px; margin: 0; }
+    h2 { font-size: 16px; margin: 0 0 4px; }
+    h3 { font-size: 14px; margin: 0 0 10px; color: var(--text); }
+    p.description {
+      margin: 0 0 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ===== Form controls ===== */
+    label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+    input, select, textarea {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+      background: #fafafa;
+      color: var(--text);
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+      background: #ffffff;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 56px;
+      line-height: 1.4;
+    }
+    .field { margin-bottom: 12px; }
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .field-row-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .field-row, .field-row-3 { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      transition: filter 0.15s, background 0.15s;
+    }
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+    .btn-primary:hover { filter: brightness(0.93); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-muted);
+      border-color: var(--border);
+    }
+    .btn-secondary:hover { background: #fafafa; color: var(--text); }
+    .btn-ghost {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-danger {
+      background: transparent;
+      border: none;
+      color: var(--danger);
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-danger:hover { text-decoration: underline; }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    /* ===== Lists ===== */
+    .category-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .category-item {
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      background: #fafafa;
+    }
+    .category-item.is-selected {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+    .category-item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .category-item-title {
+      font-weight: 600;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .category-item-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .category-item-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .menu-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .menu-item-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 10px;
+      display: grid;
+      grid-template-columns: 64px minmax(0,1fr) auto;
+      gap: 10px;
+      font-size: 13px;
+      background: #fafafa;
+      align-items: start;
+    }
+    .menu-item-card img {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #ddd;
+    }
+    .menu-item-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .menu-item-title-row strong { font-size: 14px; }
+    .menu-item-price { font-weight: 600; color: var(--accent); }
+    .menu-item-desc {
+      color: var(--text-muted);
+      line-height: 1.45;
+      font-size: 12px;
+      display: grid;
+      gap: 2px;
+    }
+    .menu-item-desc .lang-tag {
+      display: inline-block;
+      width: 24px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .menu-item-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      padding: 20px 10px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-sm);
+      background: #fafafa;
+    }
+
+    /* ===== JSON preview ===== */
+    .json-preview {
+      margin-top: 12px;
+      font-size: 11px;
+      background: #0b1020;
+      color: #e4f0ff;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      overflow: auto;
+      max-height: 320px;
+      white-space: pre;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      line-height: 1.5;
+    }
+    .json-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .json-header h3 { margin: 0; }
+
+    /* ===== Modal ===== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 16px;
+    }
+    .modal-backdrop.is-open { display: flex; }
+    .modal {
+      background: var(--surface);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 90vh;
+      overflow: auto;
+      padding: 20px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    }
+    .modal h3 { margin: 0 0 14px; font-size: 16px; }
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-mark" aria-hidden="true"></div>
+        <span>다국어 메뉴판 · 관리자</span>
+      </div>
+      <span class="header-note">관리자 변경 사항은 백엔드 JSON 파일에 저장되고 고객 페이지에 반영됩니다.</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- 좌측: 카테고리 관리 -->
+    <div class="col">
+      <section aria-labelledby="cat-heading">
+        <h2 id="cat-heading">카테고리 관리</h2>
+        <p class="description">메뉴판의 상위 구조입니다. 한국어 이름은 필수, 영어/일본어는 선택입니다.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="categoryNameKo">카테고리 이름 (한국어) *</label>
+            <input id="categoryNameKo" type="text" placeholder="예: 주류/음료" />
+          </div>
+          <div class="field">
+            <label for="categoryCode">코드 (영문 슬러그) *</label>
+            <input id="categoryCode" type="text" placeholder="예: drinks" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="categoryNameEn">Name (English)</label>
+            <input id="categoryNameEn" type="text" placeholder="e.g. Drinks" />
+          </div>
+          <div class="field">
+            <label for="categoryNameJa">名前 (日本語)</label>
+            <input id="categoryNameJa" type="text" placeholder="例: ドリンク" />
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="addCategoryBtn">+ 카테고리 추가</button>
+          <button class="btn btn-secondary" id="resetDataBtn">초기 데이터 다시 불러오기</button>
+        </div>
+
+        <div class="category-list" id="categoryList"></div>
+      </section>
+    </div>
+
+    <!-- 우측: 메뉴 아이템 + JSON 미리보기 -->
+    <div class="col">
+      <section aria-labelledby="menu-heading">
+        <h2 id="menu-heading">메뉴 아이템 관리</h2>
+        <p class="description">각 카테고리 안에 실제 메뉴를 등록하고 언어별 설명을 입력합니다.</p>
+
+        <div class="field">
+          <label for="categorySelect">카테고리 선택</label>
+          <select id="categorySelect"></select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="menuNameKo">메뉴 이름 (한국어) *</label>
+            <input id="menuNameKo" type="text" placeholder="예: 짜장면" />
+          </div>
+          <div class="field">
+            <label for="menuPrice">가격 *</label>
+            <input id="menuPrice" type="text" placeholder="예: 7,000" />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="menuNameEn">Name (English)</label>
+            <input id="menuNameEn" type="text" placeholder="e.g. Jjajangmyeon" />
+          </div>
+          <div class="field">
+            <label for="menuNameJa">名前 (日本語)</label>
+            <input id="menuNameJa" type="text" placeholder="例: ジャージャー麺" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="imageUrl">메뉴 사진 URL (비워두면 placeholder 사용)</label>
+          <input id="imageUrl" type="text" placeholder="예: https://picsum.photos/seed/jjajang/400/260" />
+        </div>
+
+        <div class="field-row-3">
+          <div class="field">
+            <label for="descKo">설명 (한국어)</label>
+            <textarea id="descKo" placeholder="예: 춘장에 양파와 돼지고기를 볶은 한국식 자장면."></textarea>
+          </div>
+          <div class="field">
+            <label for="descEn">Description (English)</label>
+            <textarea id="descEn" placeholder="e.g. Korean noodles in savory black bean sauce."></textarea>
+          </div>
+          <div class="field">
+            <label for="descJa">説明 (日本語)</label>
+            <textarea id="descJa" placeholder="例: 黒味噌で炒めた韓国式ジャージャー麺。"></textarea>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="addMenuItemBtn">+ 메뉴 추가</button>
+        </div>
+
+        <div class="menu-list" id="menuList"></div>
+
+        <div class="json-header">
+          <h3>JSON 미리보기 (실시간)</h3>
+          <button class="btn btn-secondary" id="copyJsonBtn" type="button">복사</button>
+        </div>
+        <p class="description" style="margin-top:6px;">백엔드 <code>/api/menu</code> 에 저장되는 메뉴 데이터 구조입니다.</p>
+        <pre class="json-preview" id="jsonPreview" aria-live="polite"></pre>
+      </section>
+    </div>
+  </main>
+
+  <!-- 수정 모달: 카테고리/메뉴 공용 -->
+  <div class="modal-backdrop" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+    <div class="modal">
+      <h3 id="editModalTitle">수정</h3>
+      <div id="editModalBody"></div>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalCancelBtn">취소</button>
+        <button class="btn btn-primary" id="modalSaveBtn">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 메뉴 데이터 모듈 (window.menuData) -->
+  <script src="./menu-data.js"></script>
+  <script>
+    /**
+     * Admin view
+     *
+     * 핵심 함수:
+     *   loadInitialData()  - GET /api/menu -> state, 실패 시 menu-data.js fallback
+     *   saveMenuData()     - PUT /api/menu 로 백엔드 JSON 파일에 저장
+     *   render()           - 모든 영역 다시 그리기 (카테고리 / 메뉴 / JSON)
+     *
+     * 영속성: localStorage 사용 안 함. 서버의 data/menu-data.json 파일에 저장.
+     */
+
+    // ===== State =====
+    const state = {
+      categories: [],   // [{ id, name: { ko, en, ja } }]
+      menu: {},         // { [categoryId]: [{ id, name: {ko,en,ja}, price, imageUrl, desc: {ko,en,ja} }] }
+      selectedCategoryId: null
+    };
+
+    // 편집 모달 임시 컨텍스트 (어떤 항목을 수정중인지)
+    let editContext = null;
+
+    // ===== DOM refs =====
+    const categoryListEl = document.getElementById('categoryList');
+    const categorySelectEl = document.getElementById('categorySelect');
+    const menuListEl = document.getElementById('menuList');
+    const jsonPreviewEl = document.getElementById('jsonPreview');
+
+    const editModalEl = document.getElementById('editModal');
+    const editModalTitleEl = document.getElementById('editModalTitle');
+    const editModalBodyEl = document.getElementById('editModalBody');
+
+    // 로컬에서는 같은 origin, 배포 환경에서는 Perplexity 포트 프록시를 사용.
+    const API_BASE = location.hostname === 'localhost' || location.protocol === 'file:'
+      ? ''
+      : 'port/5000';
+
+    function apiUrl(path) {
+      return API_BASE + path;
+    }
+
+    // ===== Utilities =====
+    function deepCopy(value) {
+      // 가벼운 깊은 복사 - 우리 데이터 구조는 단순(원시값/객체/배열)이라 충분.
+      return JSON.parse(JSON.stringify(value));
+    }
+
+    function slugify(text) {
+      return String(text)
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9가-힣]+/g, '-')
+        .replace(/^-+|-+$/g, '') || ('item-' + Date.now());
+    }
+
+    function val(id) {
+      return document.getElementById(id).value.trim();
+    }
+    function setVal(id, value) {
+      document.getElementById(id).value = value || '';
+    }
+
+    /** 다국어 객체에서 ko fallback 으로 표시 텍스트 얻기 */
+    function pickDisplay(obj) {
+      if (!obj) return '';
+      return obj.ko || obj.en || obj.ja || '';
+    }
+
+    // ===== Data loading / saving =====
+
+    /** 초기 데이터 로드 (백엔드 API -> state, 실패하면 window.menuData fallback) */
+    async function loadInitialData() {
+      let src = window.menuData || { categories: [], menu: {} };
+      try {
+        const res = await fetch(apiUrl('/api/menu'), { headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error('API 응답 오류');
+        src = await res.json();
+      } catch (error) {
+        console.info('API를 사용할 수 없어 menu-data.js 기본 데이터를 사용합니다.', error);
+      }
+      state.categories = deepCopy(src.categories || []);
+      state.menu = deepCopy(src.menu || {});
+      // 모든 카테고리에 대해 menu 배열이 존재하도록 보정
+      state.categories.forEach(cat => {
+        if (!state.menu[cat.id]) state.menu[cat.id] = [];
+      });
+      state.selectedCategoryId = state.categories[0]?.id || null;
+    }
+
+    /**
+     * 변경 사항 저장 후 화면 갱신.
+     * 백엔드가 없거나 파일을 직접 열었을 때는 화면 상태만 갱신된다.
+     */
+    async function saveMenuData() {
+      const payload = { categories: state.categories, menu: state.menu };
+      try {
+        const res = await fetch(apiUrl('/api/menu'), {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.message || '저장 실패');
+        }
+      } catch (error) {
+        console.info('백엔드 저장을 건너뛰고 현재 화면 상태만 갱신합니다.', error);
+        if (location.protocol !== 'file:') {
+          alert('서버 저장에 실패했습니다. 잠시 후 다시 시도해 주세요.');
+        }
+      } finally {
+        render();
+      }
+    }
+
+    // ===== Render =====
+
+    function render() {
+      renderCategories();
+      renderCategorySelect();
+      renderMenuList();
+      renderJsonPreview();
+    }
+
+    function renderCategories() {
+      categoryListEl.innerHTML = '';
+
+      if (state.categories.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.textContent = '아직 카테고리가 없습니다. 위에서 추가해 보세요.';
+        categoryListEl.appendChild(empty);
+        return;
+      }
+
+      state.categories.forEach(cat => {
+        const row = document.createElement('div');
+        row.className = 'category-item';
+        if (cat.id === state.selectedCategoryId) row.classList.add('is-selected');
+
+        const main = document.createElement('div');
+        main.className = 'category-item-main';
+
+        const title = document.createElement('div');
+        title.className = 'category-item-title';
+        const titleText = document.createElement('span');
+        titleText.textContent = pickDisplay(cat.name);
+        const codeBadge = document.createElement('span');
+        codeBadge.className = 'badge';
+        codeBadge.textContent = cat.id;
+        title.appendChild(titleText);
+        title.appendChild(codeBadge);
+
+        const meta = document.createElement('div');
+        meta.className = 'category-item-meta';
+        const enText = cat.name.en || '—';
+        const jaText = cat.name.ja || '—';
+        const itemCount = (state.menu[cat.id] || []).length;
+        meta.textContent = `EN: ${enText} · JA: ${jaText} · ${itemCount}개 메뉴`;
+
+        main.appendChild(title);
+        main.appendChild(meta);
+
+        const actions = document.createElement('div');
+        actions.className = 'category-item-actions';
+
+        const selectBtn = document.createElement('button');
+        selectBtn.className = 'btn-ghost';
+        selectBtn.type = 'button';
+        selectBtn.textContent = '선택';
+        selectBtn.addEventListener('click', () => {
+          state.selectedCategoryId = cat.id;
+          categorySelectEl.value = cat.id;
+          render();
+        });
+
+        const editBtn = document.createElement('button');
+        editBtn.className = 'btn-ghost';
+        editBtn.type = 'button';
+        editBtn.textContent = '수정';
+        editBtn.addEventListener('click', () => openCategoryEditor(cat.id));
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'btn-danger';
+        delBtn.type = 'button';
+        delBtn.textContent = '삭제';
+        delBtn.addEventListener('click', () => deleteCategory(cat.id));
+
+        actions.appendChild(selectBtn);
+        actions.appendChild(editBtn);
+        actions.appendChild(delBtn);
+
+        row.appendChild(main);
+        row.appendChild(actions);
+        categoryListEl.appendChild(row);
+      });
+    }
+
+    function renderCategorySelect() {
+      categorySelectEl.innerHTML = '';
+      state.categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.textContent = `${pickDisplay(cat.name)} (${cat.id})`;
+        categorySelectEl.appendChild(opt);
+      });
+      if (state.selectedCategoryId) {
+        categorySelectEl.value = state.selectedCategoryId;
+      }
+    }
+
+    function renderMenuList() {
+      menuListEl.innerHTML = '';
+      const catId = state.selectedCategoryId;
+      if (!catId) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.textContent = '카테고리를 먼저 추가하고 선택해 주세요.';
+        menuListEl.appendChild(empty);
+        return;
+      }
+      const items = state.menu[catId] || [];
+      if (items.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.textContent = '이 카테고리에는 아직 메뉴가 없습니다.';
+        menuListEl.appendChild(empty);
+        return;
+      }
+
+      items.forEach(item => {
+        menuListEl.appendChild(renderMenuItem(item, catId));
+      });
+    }
+
+    function renderMenuItem(item, catId) {
+      const card = document.createElement('div');
+      card.className = 'menu-item-card';
+
+      const img = document.createElement('img');
+      img.src = item.imageUrl || (window.MENU_PLACEHOLDER_IMAGE || '');
+      img.alt = pickDisplay(item.name);
+      img.addEventListener('error', () => {
+        img.src = window.MENU_PLACEHOLDER_IMAGE || '';
+      }, { once: true });
+
+      const body = document.createElement('div');
+
+      const titleRow = document.createElement('div');
+      titleRow.className = 'menu-item-title-row';
+      const strongName = document.createElement('strong');
+      strongName.textContent = pickDisplay(item.name);
+      const price = document.createElement('span');
+      price.className = 'menu-item-price';
+      price.textContent = item.price ? item.price + '원' : '-';
+      titleRow.appendChild(strongName);
+      titleRow.appendChild(price);
+
+      const desc = document.createElement('div');
+      desc.className = 'menu-item-desc';
+      desc.innerHTML =
+        `<div><span class="lang-tag">KO</span>${escapeHtml(item.desc?.ko) || '-'}</div>` +
+        `<div><span class="lang-tag">EN</span>${escapeHtml(item.desc?.en) || '-'}</div>` +
+        `<div><span class="lang-tag">JA</span>${escapeHtml(item.desc?.ja) || '-'}</div>`;
+
+      body.appendChild(titleRow);
+      body.appendChild(desc);
+
+      const actions = document.createElement('div');
+      actions.className = 'menu-item-actions';
+
+      const editBtn = document.createElement('button');
+      editBtn.className = 'btn-ghost';
+      editBtn.type = 'button';
+      editBtn.textContent = '수정';
+      editBtn.addEventListener('click', () => openMenuEditor(catId, item.id));
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn-danger';
+      delBtn.type = 'button';
+      delBtn.textContent = '삭제';
+      delBtn.addEventListener('click', () => deleteMenuItem(catId, item.id));
+
+      actions.appendChild(editBtn);
+      actions.appendChild(delBtn);
+
+      card.appendChild(img);
+      card.appendChild(body);
+      card.appendChild(actions);
+      return card;
+    }
+
+    function renderJsonPreview() {
+      // 고객용과 같은 구조를 그대로 보여주기 위해 selectedCategoryId 같은 UI 상태는 제외
+      const exportData = {
+        categories: state.categories,
+        menu: state.menu
+      };
+      jsonPreviewEl.textContent = JSON.stringify(exportData, null, 2);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // ===== Mutations: Category =====
+
+    function addCategory() {
+      const ko = val('categoryNameKo');
+      const code = val('categoryCode');
+      const en = val('categoryNameEn');
+      const ja = val('categoryNameJa');
+
+      if (!ko || !code) {
+        alert('카테고리 한국어 이름과 코드는 필수입니다.');
+        return;
+      }
+      if (!/^[a-z0-9-]+$/.test(code)) {
+        alert('코드는 영문 소문자, 숫자, 하이픈만 사용 가능합니다.');
+        return;
+      }
+      if (state.categories.some(c => c.id === code)) {
+        alert('이미 존재하는 코드입니다.');
+        return;
+      }
+
+      state.categories.push({ id: code, name: { ko, en, ja } });
+      state.menu[code] = [];
+      state.selectedCategoryId = code;
+
+      setVal('categoryNameKo', '');
+      setVal('categoryCode', '');
+      setVal('categoryNameEn', '');
+      setVal('categoryNameJa', '');
+
+      saveMenuData();
+    }
+
+    function deleteCategory(catId) {
+      const cat = state.categories.find(c => c.id === catId);
+      if (!cat) return;
+      const itemCount = (state.menu[catId] || []).length;
+      const msg = itemCount > 0
+        ? `"${pickDisplay(cat.name)}" 카테고리와 그 안의 메뉴 ${itemCount}개가 모두 삭제됩니다. 계속할까요?`
+        : `"${pickDisplay(cat.name)}" 카테고리를 삭제할까요?`;
+      if (!confirm(msg)) return;
+
+      state.categories = state.categories.filter(c => c.id !== catId);
+      delete state.menu[catId];
+      if (state.selectedCategoryId === catId) {
+        state.selectedCategoryId = state.categories[0]?.id || null;
+      }
+      saveMenuData();
+    }
+
+    function openCategoryEditor(catId) {
+      const cat = state.categories.find(c => c.id === catId);
+      if (!cat) return;
+      editContext = { type: 'category', catId };
+      editModalTitleEl.textContent = '카테고리 수정';
+      editModalBodyEl.innerHTML = `
+        <div class="field"><label>코드</label><input type="text" value="${escapeHtml(cat.id)}" disabled /></div>
+        <div class="field"><label>이름 (한국어) *</label><input id="m_cat_ko" type="text" /></div>
+        <div class="field"><label>Name (English)</label><input id="m_cat_en" type="text" /></div>
+        <div class="field"><label>名前 (日本語)</label><input id="m_cat_ja" type="text" /></div>
+      `;
+      document.getElementById('m_cat_ko').value = cat.name.ko || '';
+      document.getElementById('m_cat_en').value = cat.name.en || '';
+      document.getElementById('m_cat_ja').value = cat.name.ja || '';
+      openModal();
+    }
+
+    function saveCategoryEditor() {
+      const cat = state.categories.find(c => c.id === editContext.catId);
+      if (!cat) return;
+      const ko = document.getElementById('m_cat_ko').value.trim();
+      if (!ko) { alert('한국어 이름은 필수입니다.'); return; }
+      cat.name = {
+        ko,
+        en: document.getElementById('m_cat_en').value.trim(),
+        ja: document.getElementById('m_cat_ja').value.trim()
+      };
+      closeModal();
+      saveMenuData();
+    }
+
+    // ===== Mutations: Menu item =====
+
+    function addMenuItem() {
+      const catId = categorySelectEl.value;
+      if (!catId) { alert('먼저 카테고리를 추가/선택해 주세요.'); return; }
+
+      const nameKo = val('menuNameKo');
+      const price = val('menuPrice');
+      if (!nameKo) { alert('메뉴 한국어 이름은 필수입니다.'); return; }
+      if (!price) { alert('가격은 필수입니다.'); return; }
+
+      const baseId = slugify(nameKo);
+      let id = baseId;
+      let n = 1;
+      while ((state.menu[catId] || []).some(it => it.id === id)) {
+        id = baseId + '-' + (++n);
+      }
+
+      const item = {
+        id,
+        name: { ko: nameKo, en: val('menuNameEn'), ja: val('menuNameJa') },
+        price,
+        imageUrl: val('imageUrl') || (window.MENU_PLACEHOLDER_IMAGE || ''),
+        desc: { ko: val('descKo'), en: val('descEn'), ja: val('descJa') }
+      };
+      if (!state.menu[catId]) state.menu[catId] = [];
+      state.menu[catId].push(item);
+
+      // 입력 필드 초기화
+      ['menuNameKo','menuNameEn','menuNameJa','menuPrice','imageUrl','descKo','descEn','descJa']
+        .forEach(id => { document.getElementById(id).value = ''; });
+
+      state.selectedCategoryId = catId;
+      saveMenuData();
+    }
+
+    function deleteMenuItem(catId, itemId) {
+      const items = state.menu[catId] || [];
+      const item = items.find(it => it.id === itemId);
+      if (!item) return;
+      if (!confirm(`"${pickDisplay(item.name)}" 메뉴를 삭제할까요?`)) return;
+      state.menu[catId] = items.filter(it => it.id !== itemId);
+      saveMenuData();
+    }
+
+    function openMenuEditor(catId, itemId) {
+      const item = (state.menu[catId] || []).find(it => it.id === itemId);
+      if (!item) return;
+      editContext = { type: 'menu', catId, itemId };
+      editModalTitleEl.textContent = '메뉴 수정';
+      editModalBodyEl.innerHTML = `
+        <div class="field-row">
+          <div class="field"><label>이름 (한국어) *</label><input id="m_item_ko" type="text" /></div>
+          <div class="field"><label>가격 *</label><input id="m_item_price" type="text" /></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Name (English)</label><input id="m_item_en" type="text" /></div>
+          <div class="field"><label>名前 (日本語)</label><input id="m_item_ja" type="text" /></div>
+        </div>
+        <div class="field"><label>이미지 URL</label><input id="m_item_image" type="text" /></div>
+        <div class="field-row-3">
+          <div class="field"><label>설명 (한국어)</label><textarea id="m_item_desc_ko"></textarea></div>
+          <div class="field"><label>Description (EN)</label><textarea id="m_item_desc_en"></textarea></div>
+          <div class="field"><label>説明 (JA)</label><textarea id="m_item_desc_ja"></textarea></div>
+        </div>
+      `;
+      document.getElementById('m_item_ko').value = item.name?.ko || '';
+      document.getElementById('m_item_en').value = item.name?.en || '';
+      document.getElementById('m_item_ja').value = item.name?.ja || '';
+      document.getElementById('m_item_price').value = item.price || '';
+      document.getElementById('m_item_image').value = item.imageUrl || '';
+      document.getElementById('m_item_desc_ko').value = item.desc?.ko || '';
+      document.getElementById('m_item_desc_en').value = item.desc?.en || '';
+      document.getElementById('m_item_desc_ja').value = item.desc?.ja || '';
+      openModal();
+    }
+
+    function saveMenuEditor() {
+      const item = (state.menu[editContext.catId] || []).find(it => it.id === editContext.itemId);
+      if (!item) return;
+      const ko = document.getElementById('m_item_ko').value.trim();
+      const price = document.getElementById('m_item_price').value.trim();
+      if (!ko) { alert('한국어 이름은 필수입니다.'); return; }
+      if (!price) { alert('가격은 필수입니다.'); return; }
+      item.name = {
+        ko,
+        en: document.getElementById('m_item_en').value.trim(),
+        ja: document.getElementById('m_item_ja').value.trim()
+      };
+      item.price = price;
+      item.imageUrl = document.getElementById('m_item_image').value.trim() || (window.MENU_PLACEHOLDER_IMAGE || '');
+      item.desc = {
+        ko: document.getElementById('m_item_desc_ko').value.trim(),
+        en: document.getElementById('m_item_desc_en').value.trim(),
+        ja: document.getElementById('m_item_desc_ja').value.trim()
+      };
+      closeModal();
+      saveMenuData();
+    }
+
+    // ===== Modal helpers =====
+    function openModal() { editModalEl.classList.add('is-open'); }
+    function closeModal() { editModalEl.classList.remove('is-open'); editContext = null; }
+
+    document.getElementById('modalCancelBtn').addEventListener('click', closeModal);
+    document.getElementById('modalSaveBtn').addEventListener('click', () => {
+      if (!editContext) return;
+      if (editContext.type === 'category') saveCategoryEditor();
+      else if (editContext.type === 'menu') saveMenuEditor();
+    });
+    editModalEl.addEventListener('click', (e) => {
+      if (e.target === editModalEl) closeModal();
+    });
+
+    // ===== Wire up form actions =====
+    document.getElementById('addCategoryBtn').addEventListener('click', addCategory);
+    document.getElementById('addMenuItemBtn').addEventListener('click', addMenuItem);
+    document.getElementById('resetDataBtn').addEventListener('click', () => {
+      if (!confirm('지금까지의 변경 사항을 모두 버리고 초기 데이터로 돌아갈까요?')) return;
+      const src = window.menuData || { categories: [], menu: {} };
+      state.categories = deepCopy(src.categories || []);
+      state.menu = deepCopy(src.menu || {});
+      state.categories.forEach(cat => {
+        if (!state.menu[cat.id]) state.menu[cat.id] = [];
+      });
+      state.selectedCategoryId = state.categories[0]?.id || null;
+      saveMenuData();
+    });
+    categorySelectEl.addEventListener('change', () => {
+      state.selectedCategoryId = categorySelectEl.value;
+      render();
+    });
+
+    document.getElementById('copyJsonBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(jsonPreviewEl.textContent);
+        const btn = document.getElementById('copyJsonBtn');
+        const original = btn.textContent;
+        btn.textContent = '복사됨';
+        setTimeout(() => { btn.textContent = original; }, 1200);
+      } catch (e) {
+        alert('복사에 실패했습니다. 직접 선택해서 복사해 주세요.');
+      }
+    });
+
+    // ===== Init =====
+    loadInitialData().then(render);
+  </script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
