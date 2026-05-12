@@ -170,7 +170,7 @@ window.menuData = {
     id: 'gongbugaju-jung',
     name: { ko: '공부가주 (중)', en: 'Gongbuga Baijiu (M)', ja: '孔府家酒（中）' },
     price: '23,000',
-    imageUrl: 'https://picsum.photos/seed/gongbugaju1/400/260',
+    imageUrl: 'https://d1e2y5wc27crnp.cloudfront.net/media/core/product/thumbnail/08c0f029-3424-4a8e-9943-e0a09fedcca4.webp',
     desc: {
       ko: '중간 용량의 공부가주로 부담 없이 즐기기 좋습니다.',
       en: 'Gongbuga-style baijiu, medium bottle — easy to enjoy.',
