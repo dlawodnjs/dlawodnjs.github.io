@@ -49,7 +49,7 @@ window.menuData = {
     id: 'beer',
     name: { ko: '맥주', en: 'Beer', ja: 'ビール' },
     price: '5,000',
-    imageUrl: 'https://picsum.photos/seed/beer/400/260',
+    imageUrl: 'photo/junbi.png',
     desc: {
       ko: '시원한 생맥주 또는 병맥주 한 잔.',
       en: 'Cold draft or bottled beer.',
@@ -71,7 +71,7 @@ window.menuData = {
     id: 'cheongha',
     name: { ko: '청하', en: 'Cheongha', ja: '清河' },
     price: '6,000',
-    imageUrl: 'https://picsum.photos/seed/cheongha/400/260',
+    imageUrl: 'photo/junbi.png',
     desc: {
       ko: '부드럽고 깔끔한 맛의 청주 스타일 한국 술입니다.',
       en: 'A light and smooth Korean rice wine with a clean finish.',
@@ -338,551 +338,553 @@ window.menuData = {
   }
 ],
 
-    // 3) 중새우 및 고기 요리
-    dish: [
-      {
-        id: 'yangjangpi',
-        name: { ko: '양장피', en: 'Yangjangpi cold platter', ja: 'ヤンジャンピ冷菜' },
-        price: '38,000',
-        imageUrl: 'https://picsum.photos/seed/yangjangpi/400/260',
-        desc: {
-          ko: '해산물과 채소, 당면을 넣어 먹는 매콤한 겨자 소스 냉채입니다.',
-          en: 'A cold platter of seafood, vegetables, and glass noodles with spicy mustard sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'ohhyang-jangyuk',
-        name: { ko: '오향장육', en: 'Five-spice sliced pork', ja: '五香チャーシュー' },
-        price: '38,000',
-        imageUrl: 'https://picsum.photos/seed/ohhyang/400/260',
-        desc: {
-          ko: '다섯 가지 향신료로 삶아낸 돼지고기를 얇게 썰어낸 냉채 요리입니다.',
-          en: 'Chilled sliced pork simmered with Chinese five-spice and served cold.',
-          ja: ''
-        }
-      },
-      {
-        id: 'haepari-naengchae',
-        name: { ko: '해파리냉채', en: 'Jellyfish salad', ja: 'クラゲ冷菜' },
-        price: '28,000',
-        imageUrl: 'https://picsum.photos/seed/haepari/400/260',
-        desc: {
-          ko: '오이와 해파리를 새콤하게 무친 중국식 냉채입니다.',
-          en: 'A refreshing cold salad of jellyfish and cucumber in a tangy sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'sampum-naengchae',
-        name: { ko: '삼품냉채', en: 'Three-kind cold appetizer', ja: '三品冷菜盛り合わせ' },
-        price: '40,000',
-        imageUrl: 'https://picsum.photos/seed/sampum/400/260',
-        desc: {
-          ko: '세 가지 냉채를 한 번에 맛볼 수 있는 모둠 냉채입니다.',
-          en: 'Assorted plate of three different Chinese-style cold appetizers.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yusanseul',
-        name: { ko: '유산슬', en: 'Yusanseul (seafood & vegetables)', ja: '海鮮と野菜のとろみ炒め（ユサンスル）' },
-        price: '40,000',
-        imageUrl: 'https://picsum.photos/seed/yusanseul/400/260',
-        desc: {
-          ko: '해산물과 채소, 고기를 걸쭉한 소스로 볶아낸 대표 중화요리입니다.',
-          en: 'Stir-fried seafood, meat, and vegetables in a thick savory sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'palbochae',
-        name: { ko: '팔보채', en: 'Palbochae (eight-treasure stir-fry)', ja: '八宝菜' },
-        price: '40,000',
-        imageUrl: 'https://picsum.photos/seed/palbochae/400/260',
-        desc: {
-          ko: '여러 가지 해산물과 채소를 함께 볶아낸 팔보채입니다.',
-          en: 'Classic stir-fry of assorted seafood, meat, and vegetables.',
-          ja: ''
-        }
-      },
-      {
-        id: 'samseon-nurungjitang',
-        name: { ko: '삼선누룽지탕', en: 'Seafood sizzling rice soup', ja: '三鮮おこげスープ' },
-        price: '45,000',
-        imageUrl: 'https://picsum.photos/seed/nurungji/400/260',
-        desc: {
-          ko: '바삭한 누룽지에 해산물 소스를 부어 먹는 탕 요리입니다.',
-          en: 'Crispy scorched rice served with hot seafood sauce poured over.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gye-sal-eocho-bokkeum',
-        name: { ko: '계살어초볶음', en: 'Chicken & fish in sweet vinegar sauce', ja: '鶏肉と魚の甘酢炒め' },
-        price: '60,000',
-        imageUrl: 'https://picsum.photos/seed/geysal/400/260',
-        desc: {
-          ko: '닭고기와 생선을 새콤달콤한 어초 소스로 볶은 요리입니다.',
-          en: 'Stir-fried chicken and fish in a sweet and sour vinegar sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'bukgyeong-eocho',
-        name: { ko: '북경어초', en: 'Beijing-style sweet vinegar fish', ja: '北京式魚甘酢' },
-        price: '60,000',
-        imageUrl: 'https://picsum.photos/seed/bukgyeong/400/260',
-        desc: {
-          ko: '통생선을 바삭하게 튀겨 새콤달콤한 소스를 끼얹은 요리입니다.',
-          en: 'Whole fried fish topped with a sweet and sour Beijing-style sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'jeongabok',
-        name: { ko: '전가복', en: 'Jeongabok deluxe seafood & meat', ja: '海鮮と肉の豪華煮込み（チョンガボク）' },
-        price: '70,000',
-        imageUrl: 'https://picsum.photos/seed/jeongabok/400/260',
-        desc: {
-          ko: '전복, 해삼 등 고급 재료를 넣어 푹 끓인 진한 소스 요리입니다.',
-          en: 'A rich braised dish with abalone, sea cucumber, and assorted meats.',
-          ja: ''
-        }
-      },
-      {
-        id: 'jungsaeu-jung',
-        name: { ko: '중새우 요리 (칠리/깐풍/크림) 중', en: 'Prawn dish (chili/kkanpung/cream, medium)', ja: '中エビ料理（チリ/カンプン/クリーム・中）' },
-        price: '30,000',
-        imageUrl: 'https://picsum.photos/seed/jungsaeu1/400/260',
-        desc: {
-          ko: '중새우를 칠리, 깐풍, 크림 중에서 선택해 즐기는 중간 사이즈 요리입니다.',
-          en: 'Medium portion prawn dish with your choice of chili, spicy garlic, or cream sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'jungsaeu-dae',
-        name: { ko: '중새우 요리 (칠리/깐풍/크림) 대', en: 'Prawn dish (chili/kkanpung/cream, large)', ja: '中エビ料理（チリ/カンプン/クリーム・大）' },
-        price: '40,000',
-        imageUrl: 'https://picsum.photos/seed/jungsaeu2/400/260',
-        desc: {
-          ko: '중새우를 다양한 소스로 즐길 수 있는 대(大) 사이즈 메뉴입니다.',
-          en: 'Large portion prawn dish with a choice of chili, spicy garlic, or cream sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'hyangra-saeu',
-        name: { ko: '향라두치새우', en: 'Spicy stir-fried shrimp', ja: '香辣海老炒め' },
-        price: '40,000',
-        imageUrl: 'https://picsum.photos/seed/hyangrasaeu/400/260',
-        desc: {
-          ko: '매콤한 향라 소스로 볶아낸 새우 요리입니다.',
-          en: 'Shrimp stir-fried in a spicy, aromatic chili sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yuringi',
-        name: { ko: '유림기', en: 'Yuringi soy sauce fried chicken', ja: '油淋鶏（ユーリンチー）' },
-        price: '30,000',
-        imageUrl: 'https://picsum.photos/seed/yuringi/400/260',
-        desc: {
-          ko: '바삭하게 튀긴 닭고기에 간장 소스를 끼얹은 대표 요리입니다.',
-          en: 'Crispy fried chicken topped with a savory soy-based sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'kanpunggi',
-        name: { ko: '깐풍기', en: 'Kkanpunggi (spicy garlic fried chicken)', ja: 'カンプンギ（鶏の辛味揚げ）' },
-        price: '30,000',
-        imageUrl: 'https://picsum.photos/seed/kanpunggi/400/260',
-        desc: {
-          ko: '고추와 마늘을 넣어 매콤하게 볶아낸 닭튀김 요리입니다.',
-          en: 'Fried chicken tossed with chili peppers and garlic in a spicy sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'hyangra-chicken',
-        name: { ko: '향라두치치킨', en: 'Spicy stir-fried chicken', ja: '香辣鶏炒め' },
-        price: '30,000',
-        imageUrl: 'https://picsum.photos/seed/hyangrachicken/400/260',
-        desc: {
-          ko: '향라 스타일의 매콤한 소스로 볶아낸 치킨 요리입니다.',
-          en: 'Chicken stir-fried in a spicy aromatic chili sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'mongolian-tenderloin',
-        name: { ko: '몽골리안 안심', en: 'Mongolian beef tenderloin', ja: 'モンゴリアン牛ヒレ炒め' },
-        price: '30,000',
-        imageUrl: 'https://picsum.photos/seed/mongolian/400/260',
-        desc: {
-          ko: '달콤짭짤한 소스로 볶아낸 몽골리안 스타일 소고기 안심입니다.',
-          en: 'Beef tenderloin stir-fried in a sweet and savory Mongolian-style sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'blackpepper-tenderloin',
-        name: { ko: '흑후추 안심', en: 'Black pepper beef tenderloin', ja: '黒胡椒牛ヒレ炒め' },
-        price: '30,000',
-        imageUrl: 'https://picsum.photos/seed/blackpepper/400/260',
-        desc: {
-          ko: '진한 흑후추 소스로 볶아낸 소고기 안심 요리입니다.',
-          en: 'Beef tenderloin stir-fried with a rich black pepper sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'tangsuyuk-jung',
-        name: { ko: '탕수육 (중)', en: 'Sweet and sour pork (medium)', ja: '酢豚（中）' },
-        price: '21,000',
-        imageUrl: 'https://picsum.photos/seed/tangsuyuk1/400/260',
-        desc: {
-          ko: '겉은 바삭하고 속은 촉촉한 탕수육 중간 사이즈입니다.',
-          en: 'Medium portion of classic sweet and sour pork with crispy batter.',
-          ja: ''
-        }
-      },
-      {
-        id: 'tangsuyuk-dae',
-        name: { ko: '탕수육 (대)', en: 'Sweet and sour pork (large)', ja: '酢豚（大）' },
-        price: '28,000',
-        imageUrl: 'https://picsum.photos/seed/tangsuyuk2/400/260',
-        desc: {
-          ko: '여럿이 나누어 먹기 좋은 탕수육 대(大) 사이즈입니다.',
-          en: 'Large portion of sweet and sour pork for sharing.',
-          ja: ''
-        }
-      },
-      {
-        id: 'beijing-tangsuyuk-jung',
-        name: { ko: '북경탕수육 (중)', en: 'Beijing-style sweet and sour pork (medium)', ja: '北京式酢豚（中）' },
-        price: '23,000',
-        imageUrl: 'https://picsum.photos/seed/beijing1/400/260',
-        desc: {
-          ko: '소스를 부어 먹는 스타일의 북경식 탕수육 중간 사이즈입니다.',
-          en: 'Medium portion of Beijing-style sweet and sour pork with sauce poured over.',
-          ja: ''
-        }
-      },
-      {
-        id: 'beijing-tangsuyuk-dae',
-        name: { ko: '북경탕수육 (대)', en: 'Beijing-style sweet and sour pork (large)', ja: '北京式酢豚（大）' },
-        price: '31,000',
-        imageUrl: 'https://picsum.photos/seed/beijing2/400/260',
-        desc: {
-          ko: '넉넉한 양의 북경식 탕수육 대(大) 사이즈입니다.',
-          en: 'Large portion of Beijing-style sweet and sour pork for groups.',
-          ja: ''
-        }
-      },
-      {
-        id: 'sichuan-tangsuyuk-jung',
-        name: { ko: '사천탕수육 (중)', en: 'Sichuan spicy sweet and sour pork (medium)', ja: '四川風辛口酢豚（中）' },
-        price: '26,000',
-        imageUrl: 'https://picsum.photos/seed/sichuan1/400/260',
-        desc: {
-          ko: '매콤한 고추기름과 향신료를 더한 사천식 탕수육입니다.',
-          en: 'Medium portion of Sichuan-style sweet and sour pork with spicy chili oil.',
-          ja: ''
-        }
-      },
-      {
-        id: 'sichuan-tangsuyuk-dae',
-        name: { ko: '사천탕수육 (대)', en: 'Sichuan spicy sweet and sour pork (large)', ja: '四川風辛口酢豚（大）' },
-        price: '33,000',
-        imageUrl: 'https://picsum.photos/seed/sichuan2/400/260',
-        desc: {
-          ko: '얼큰한 맛이 특징인 사천식 탕수육 대 사이즈입니다.',
-          en: 'Large portion of spicy Sichuan-style sweet and sour pork.',
-          ja: ''
-        }
-      },
-      {
-        id: 'tangsufish',
-        name: { ko: '탕수생선', en: 'Sweet and sour fish', ja: '酢魚' },
-        price: '32,000',
-        imageUrl: 'https://picsum.photos/seed/tangsufish/400/260',
-        desc: {
-          ko: '생선을 바삭하게 튀겨 새콤달콤한 소스를 곁들였습니다.',
-          en: 'Crispy fried fish served with sweet and sour sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gochujapchae',
-        name: { ko: '고추잡채', en: 'Spicy shredded pork with peppers', ja: 'ピーマン細切り豚肉炒め（ゴチュジャプチェ）' },
-        price: '32,000',
-        imageUrl: 'https://picsum.photos/seed/gochujapchae/400/260',
-        desc: {
-          ko: '얇게 썬 돼지고기와 피망을 매콤하게 볶아 꽃빵과 함께 먹는 요리입니다.',
-          en: 'Thinly sliced pork stir-fried with peppers, usually served with steamed buns.',
-          ja: ''
-        }
-      },
-      {
-        id: 'mapodubu',
-        name: { ko: '마파두부', en: 'Mapo tofu', ja: '麻婆豆腐' },
-        price: '22,000',
-        imageUrl: 'https://picsum.photos/seed/mapodubu/400/260',
-        desc: {
-          ko: '두부와 다진 고기를 매콤한 소스로 볶아낸 인기 메뉴입니다.',
-          en: 'Soft tofu and minced meat in a spicy, numbing Sichuan-style sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gongbo-gejeong',
-        name: { ko: '공보계정', en: 'Kung Pao chicken', ja: '宮保鶏丁（クンポウチキン）' },
-        price: '30,000',
-        imageUrl: 'https://picsum.photos/seed/gongbo/400/260',
-        desc: {
-          ko: '닭고기와 땅콩, 고추를 함께 볶은 매콤달콤한 궁보계 스타일 요리입니다.',
-          en: 'Stir-fried chicken with peanuts and chili peppers in a sweet-spicy sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'dongpayuk',
-        name: { ko: '동파육', en: 'Dongpo braised pork belly', ja: '東坡肉' },
-        price: '38,000',
-        imageUrl: 'https://picsum.photos/seed/dongpayuk/400/260',
-        desc: {
-          ko: '두껍게 썬 삼겹살을 간장 양념에 오래 끓여낸 대표 중화요리입니다.',
-          en: 'Thick pork belly slowly braised in a rich soy-based sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'sanlatang',
-        name: { ko: '산라탕', en: 'Hot and sour soup', ja: 'サンラータン（酸辣湯）' },
-        price: '25,000',
-        imageUrl: 'https://picsum.photos/seed/sanlatang/400/260',
-        desc: {
-          ko: '식초와 후추 향이 어우러진 매콤새콤한 중국식 탕입니다.',
-          en: 'Chinese-style soup with a spicy and sour flavor from vinegar and pepper.',
-          ja: ''
-        }
-      },
-      {
-        id: 'corn-soup',
-        name: { ko: '계살옥수수스프', en: 'Chicken & corn soup', ja: '鶏肉コーンスープ' },
-        price: '28,000',
-        imageUrl: 'https://picsum.photos/seed/cornsoup/400/260',
-        desc: {
-          ko: '옥수수와 닭고기를 넣어 부드럽게 끓인 스프입니다.',
-          en: 'A mild, creamy soup with sweet corn and chicken.',
-          ja: ''
-        }
-      },
-      {
-        id: 'samseon-tang',
-        name: { ko: '삼선탕', en: 'Seafood soup', ja: '三鮮スープ' },
-        price: '22,000',
-        imageUrl: 'https://picsum.photos/seed/samseontang/400/260',
-        desc: {
-          ko: '해산물을 듬뿍 넣어 끓인 맑은 스타일의 중국식 탕입니다.',
-          en: 'Clear Chinese-style soup with assorted seafood.',
-          ja: ''
-        }
-      }
-    ],
+    // 3) 요리
+  
+    
+dish: [
+  {
+    id: 'yangjangpi',
+    name: { ko: '양장피', en: 'Yangjangpi cold platter', ja: 'ヤンジャンピ冷菜' },
+    price: '38,000',
+    imageUrl: 'https://picsum.photos/seed/yangjangpi/400/260',
+    desc: {
+      ko: '해산물과 채소, 당면을 넣어 먹는 매콤한 겨자 소스 냉채입니다.',
+      en: 'A cold seafood and vegetable platter with glass noodles and spicy mustard sauce.',
+      ja: '海鮮と野菜、春雨をピリ辛マスタードソースで和えた冷菜です。'
+    }
+  },
+  {
+    id: 'ohhyang-jangyuk',
+    name: { ko: '오향장육', en: 'Five-spice sliced pork', ja: '五香チャーシュー' },
+    price: '38,000',
+    imageUrl: 'https://picsum.photos/seed/ohhyang/400/260',
+    desc: {
+      ko: '다섯 가지 향신료로 삶아낸 돼지고기를 얇게 썰어낸 냉채 요리입니다.',
+      en: 'Chilled sliced pork simmered with Chinese five-spice and served as a cold appetizer.',
+      ja: '五香粉でじっくり煮込んだ豚肉を薄切りにした冷菜です。'
+    }
+  },
+  {
+    id: 'haepari-naengchae',
+    name: { ko: '해파리냉채', en: 'Jellyfish salad', ja: 'クラゲ冷菜' },
+    price: '28,000',
+    imageUrl: 'https://picsum.photos/seed/haepari/400/260',
+    desc: {
+      ko: '오이와 해파리를 새콤하게 무친 중국식 냉채입니다.',
+      en: 'A refreshing Chinese-style cold salad of jellyfish and cucumber in a tangy sauce.',
+      ja: 'クラゲとキュウリをさっぱりとした酢ダレで和えた中華風冷菜です。'
+    }
+  },
+  {
+    id: 'sampum-naengchae',
+    name: { ko: '삼품냉채', en: 'Three-kind cold appetizer', ja: '三品冷菜盛り合わせ' },
+    price: '40,000',
+    imageUrl: 'https://picsum.photos/seed/sampum/400/260',
+    desc: {
+      ko: '세 가지 냉채를 한 번에 맛볼 수 있는 모둠 냉채입니다.',
+      en: 'Assorted plate of three different Chinese-style cold appetizers.',
+      ja: '三種類の中華風冷菜を一度に楽しめる盛り合わせです。'
+    }
+  },
+  {
+    id: 'yusanseul',
+    name: { ko: '유산슬', en: 'Yusanseul (seafood & vegetables)', ja: '海鮮と野菜のとろみ炒め（ユサンスル）' },
+    price: '40,000',
+    imageUrl: 'https://picsum.photos/seed/yusanseul/400/260',
+    desc: {
+      ko: '해산물과 채소, 고기를 걸쭉한 소스로 볶아낸 대표 중화요리입니다.',
+      en: 'Stir-fried seafood, meat, and vegetables in a thick, savory sauce.',
+      ja: '海鮮と野菜、肉をとろみのある香ばしいソースで炒めた代表的な中華料理です。'
+    }
+  },
+  {
+    id: 'palbochae',
+    name: { ko: '팔보채', en: 'Palbochae (eight-treasure stir-fry)', ja: '八宝菜' },
+    price: '40,000',
+    imageUrl: 'https://picsum.photos/seed/palbochae/400/260',
+    desc: {
+      ko: '여러 가지 해산물과 채소를 함께 볶아낸 팔보채입니다.',
+      en: 'A classic stir-fry of assorted seafood, meat, and vegetables.',
+      ja: 'さまざまな海鮮と野菜、肉をたっぷり使った定番の八宝菜です。'
+    }
+  },
+  {
+    id: 'samseon-nurungjitang',
+    name: { ko: '삼선누룽지탕', en: 'Seafood sizzling rice soup', ja: '三鮮おこげスープ' },
+    price: '45,000',
+    imageUrl: 'https://picsum.photos/seed/nurungji/400/260',
+    desc: {
+      ko: '바삭한 누룽지에 해산물 소스를 부어 먹는 탕 요리입니다.',
+      en: 'Crispy scorched rice served with hot seafood sauce poured over.',
+      ja: '香ばしく焼いたおこげに熱々の海鮮あんをかけて味わうスープ仕立ての一品です。'
+    }
+  },
+  {
+    id: 'gye-sal-eocho-bokkeum',
+    name: { ko: '계살어초볶음', en: 'Chicken & fish in sweet vinegar sauce', ja: '鶏肉と魚の甘酢炒め' },
+    price: '60,000',
+    imageUrl: 'https://picsum.photos/seed/geysal/400/260',
+    desc: {
+      ko: '닭고기와 생선을 새콤달콤한 어초 소스로 볶은 요리입니다.',
+      en: 'Stir-fried chicken and fish in a sweet and sour vinegar-based sauce.',
+      ja: '鶏肉と魚を甘酸っぱい黒酢風ソースで炒めた一品です。'
+    }
+  },
+  {
+    id: 'bukgyeong-eocho',
+    name: { ko: '북경어초', en: 'Beijing-style sweet vinegar fish', ja: '北京式魚甘酢' },
+    price: '60,000',
+    imageUrl: 'https://picsum.photos/seed/bukgyeong/400/260',
+    desc: {
+      ko: '통생선을 바삭하게 튀겨 새콤달콤한 소스를 끼얹은 요리입니다.',
+      en: 'Whole fried fish topped with a sweet and sour Beijing-style sauce.',
+      ja: '丸ごとの魚をカリッと揚げ、甘酸っぱい北京風ソースをたっぷりかけた料理です。'
+    }
+  },
+  {
+    id: 'jeongabok',
+    name: { ko: '전가복', en: 'Jeongabok deluxe seafood & meat', ja: '海鮮と肉の豪華煮込み（チョンガボク）' },
+    price: '70,000',
+    imageUrl: 'https://picsum.photos/seed/jeongabok/400/260',
+    desc: {
+      ko: '전복, 해삼 등 고급 재료를 넣어 푹 끓인 진한 소스 요리입니다.',
+      en: 'A rich braised dish with abalone, sea cucumber, and assorted meats.',
+      ja: 'アワビやナマコなどの高級食材と肉をじっくり煮込んだ濃厚なソース煮込みです。'
+    }
+  },
+  {
+    id: 'jungsaeu-jung',
+    name: { ko: '중새우 요리 (칠리/깐풍/크림) 중', en: 'Prawn dish (chili/kkanpung/cream, medium)', ja: '中エビ料理（チリ／カンプン／クリーム・中）' },
+    price: '30,000',
+    imageUrl: 'https://picsum.photos/seed/jungsaeu1/400/260',
+    desc: {
+      ko: '중새우를 칠리, 깐풍, 크림 중에서 선택해 즐기는 중간 사이즈 요리입니다.',
+      en: 'Medium portion prawn dish with your choice of chili, spicy garlic, or cream sauce.',
+      ja: '中サイズのエビをチリソース・カンプンソース・クリームソースからお好みで選べる一品です。'
+    }
+  },
+  {
+    id: 'jungsaeu-dae',
+    name: { ko: '중새우 요리 (칠리/깐풍/크림) 대', en: 'Prawn dish (chili/kkanpung/cream, large)', ja: '中エビ料理（チリ／カンプン／クリーム・大）' },
+    price: '40,000',
+    imageUrl: 'https://picsum.photos/seed/jungsaeu2/400/260',
+    desc: {
+      ko: '중새우를 다양한 소스로 즐길 수 있는 대(大) 사이즈 메뉴입니다.',
+      en: 'Large portion prawn dish with a choice of chili, spicy garlic, or cream sauce.',
+      ja: 'チリソース・カンプンソース・クリームソースで楽しめる大皿サイズのエビ料理です。'
+    }
+  },
+  {
+    id: 'hyangra-saeu',
+    name: { ko: '향라두치새우', en: 'Spicy stir-fried shrimp', ja: '香辣エビ炒め' },
+    price: '40,000',
+    imageUrl: 'https://picsum.photos/seed/hyangrasaeu/400/260',
+    desc: {
+      ko: '매콤한 향라 소스로 볶아낸 새우 요리입니다.',
+      en: 'Shrimp stir-fried in a spicy, aromatic chili sauce.',
+      ja: '香り高いピリ辛の香辣ソースで炒めたエビ料理です。'
+    }
+  },
+  {
+    id: 'yuringi',
+    name: { ko: '유림기', en: 'Yuringi soy sauce fried chicken', ja: '油淋鶏（ユーリンチー）' },
+    price: '30,000',
+    imageUrl: 'https://picsum.photos/seed/yuringi/400/260',
+    desc: {
+      ko: '바삭하게 튀긴 닭고기에 간장 소스를 끼얹은 대표 요리입니다.',
+      en: 'Crispy fried chicken topped with a savory soy-based sauce.',
+      ja: 'カリッと揚げた鶏肉に香味醤油ダレをかけた定番中華料理です。'
+    }
+  },
+  {
+    id: 'kanpunggi',
+    name: { ko: '깐풍기', en: 'Kkanpunggi (spicy garlic fried chicken)', ja: 'カンプンギ（鶏の辛味揚げ）' },
+    price: '30,000',
+    imageUrl: 'https://picsum.photos/seed/kanpunggi/400/260',
+    desc: {
+      ko: '고추와 마늘을 넣어 매콤하게 볶아낸 닭튀김 요리입니다.',
+      en: 'Fried chicken tossed with chili peppers and garlic in a spicy sauce.',
+      ja: '唐辛子とニンニクを利かせたピリ辛ソースで炒め合わせた鶏のから揚げです。'
+    }
+  },
+  {
+    id: 'hyangra-chicken',
+    name: { ko: '향라두치치킨', en: 'Spicy stir-fried chicken', ja: '香辣鶏炒め' },
+    price: '30,000',
+    imageUrl: 'https://picsum.photos/seed/hyangrachicken/400/260',
+    desc: {
+      ko: '향라 스타일의 매콤한 소스로 볶아낸 치킨 요리입니다.',
+      en: 'Chicken stir-fried in a spicy aromatic chili sauce.',
+      ja: '香辣風のピリ辛チリソースで炒めた鶏肉料理です。'
+    }
+  },
+  {
+    id: 'mongolian-tenderloin',
+    name: { ko: '몽골리안 안심', en: 'Mongolian beef tenderloin', ja: 'モンゴリアン牛ヒレ炒め' },
+    price: '30,000',
+    imageUrl: 'https://picsum.photos/seed/mongolian/400/260',
+    desc: {
+      ko: '달콤짭짤한 소스로 볶아낸 몽골리안 스타일 소고기 안심입니다.',
+      en: 'Beef tenderloin stir-fried in a sweet and savory Mongolian-style sauce.',
+      ja: '甘辛いモンゴリアン風ソースで炒めた牛ヒレ肉の一品です。'
+    }
+  },
+  {
+    id: 'blackpepper-tenderloin',
+    name: { ko: '흑후추 안심', en: 'Black pepper beef tenderloin', ja: '黒胡椒牛ヒレ炒め' },
+    price: '30,000',
+    imageUrl: 'https://picsum.photos/seed/blackpepper/400/260',
+    desc: {
+      ko: '진한 흑후추 소스로 볶아낸 소고기 안심 요리입니다.',
+      en: 'Beef tenderloin stir-fried with a rich black pepper sauce.',
+      ja: 'コクのある黒胡椒ソースで炒めた牛ヒレ肉の料理です。'
+    }
+  },
+  {
+    id: 'tangsuyuk-jung',
+    name: { ko: '탕수육 (중)', en: 'Sweet and sour pork (medium)', ja: '酢豚（中）' },
+    price: '21,000',
+    imageUrl: 'https://picsum.photos/seed/tangsuyuk1/400/260',
+    desc: {
+      ko: '겉은 바삭하고 속은 촉촉한 탕수육 중간 사이즈입니다.',
+      en: 'Medium portion of classic sweet and sour pork with crispy batter.',
+      ja: '外はカリッと中はジューシーに揚げた酢豚の中サイズです。'
+    }
+  },
+  {
+    id: 'tangsuyuk-dae',
+    name: { ko: '탕수육 (대)', en: 'Sweet and sour pork (large)', ja: '酢豚（大）' },
+    price: '28,000',
+    imageUrl: 'https://picsum.photos/seed/tangsuyuk2/400/260',
+    desc: {
+      ko: '여럿이 나누어 먹기 좋은 탕수육 대(大) 사이즈입니다.',
+      en: 'Large portion of sweet and sour pork for sharing.',
+      ja: 'みんなで取り分けて楽しめる大皿サイズの酢豚です。'
+    }
+  },
+  {
+    id: 'beijing-tangsuyuk-jung',
+    name: { ko: '북경탕수육 (중)', en: 'Beijing-style sweet and sour pork (medium)', ja: '北京式酢豚（中）' },
+    price: '23,000',
+    imageUrl: 'https://picsum.photos/seed/beijing1/400/260',
+    desc: {
+      ko: '소스를 부어 먹는 스타일의 북경식 탕수육 중간 사이즈입니다.',
+      en: 'Medium portion of Beijing-style sweet and sour pork with sauce poured over.',
+      ja: 'とろみのあるソースをかけて味わう北京風酢豚の中サイズです。'
+    }
+  },
+  {
+    id: 'beijing-tangsuyuk-dae',
+    name: { ko: '북경탕수육 (대)', en: 'Beijing-style sweet and sour pork (large)', ja: '北京式酢豚（大）' },
+    price: '31,000',
+    imageUrl: 'https://picsum.photos/seed/beijing2/400/260',
+    desc: {
+      ko: '넉넉한 양의 북경식 탕수육 대(大) 사이즈입니다.',
+      en: 'Large portion of Beijing-style sweet and sour pork for groups.',
+      ja: 'ボリュームたっぷりでグループ向きの北京風酢豚（大サイズ）です。'
+    }
+  },
+  {
+    id: 'sichuan-tangsuyuk-jung',
+    name: { ko: '사천탕수육 (중)', en: 'Sichuan spicy sweet and sour pork (medium)', ja: '四川風辛口酢豚（中）' },
+    price: '26,000',
+    imageUrl: 'https://picsum.photos/seed/sichuan1/400/260',
+    desc: {
+      ko: '매콤한 고추기름과 향신료를 더한 사천식 탕수육입니다.',
+      en: 'Medium portion of Sichuan-style sweet and sour pork with spicy chili oil.',
+      ja: 'ラー油と香辛料を加えたピリ辛の四川風酢豚・中サイズです。'
+    }
+  },
+  {
+    id: 'sichuan-tangsuyuk-dae',
+    name: { ko: '사천탕수육 (대)', en: 'Sichuan spicy sweet and sour pork (large)', ja: '四川風辛口酢豚（大）' },
+    price: '33,000',
+    imageUrl: 'https://picsum.photos/seed/sichuan2/400/260',
+    desc: {
+      ko: '얼큰한 맛이 특징인 사천식 탕수육 대 사이즈입니다.',
+      en: 'Large portion of spicy Sichuan-style sweet and sour pork.',
+      ja: '辛味がしっかりと効いた四川風酢豚の大皿サイズです。'
+    }
+  },
+  {
+    id: 'tangsufish',
+    name: { ko: '탕수생선', en: 'Sweet and sour fish', ja: '酢魚' },
+    price: '32,000',
+    imageUrl: 'https://picsum.photos/seed/tangsufish/400/260',
+    desc: {
+      ko: '생선을 바삭하게 튀겨 새콤달콤한 소스를 곁들였습니다.',
+      en: 'Crispy fried fish served with sweet and sour sauce.',
+      ja: 'カリッと揚げた白身魚に甘酸っぱいソースを合わせた一品です。'
+    }
+  },
+  {
+    id: 'gochujapchae',
+    name: { ko: '고추잡채', en: 'Spicy shredded pork with peppers', ja: 'ピーマン細切り豚肉炒め（ゴチュジャプチェ）' },
+    price: '32,000',
+    imageUrl: 'https://picsum.photos/seed/gochujapchae/400/260',
+    desc: {
+      ko: '얇게 썬 돼지고기와 피망을 매콤하게 볶아 꽃빵과 함께 먹는 요리입니다.',
+      en: 'Thinly sliced pork stir-fried with peppers, usually served with steamed buns.',
+      ja: '細切りの豚肉とピーマンをピリ辛に炒め、花巻（中華蒸しパン）と一緒に楽しむ料理です。'
+    }
+  },
+  {
+    id: 'mapodubu',
+    name: { ko: '마파두부', en: 'Mapo tofu', ja: '麻婆豆腐' },
+    price: '22,000',
+    imageUrl: 'https://picsum.photos/seed/mapodubu/400/260',
+    desc: {
+      ko: '두부와 다진 고기를 매콤한 소스로 볶아낸 인기 메뉴입니다.',
+      en: 'Soft tofu and minced meat in a spicy, numbing Sichuan-style sauce.',
+      ja: '柔らかな豆腐とひき肉をしびれる辛さの四川風ソースで煮込んだ人気メニューです。'
+    }
+  },
+  {
+    id: 'gongbo-gejeong',
+    name: { ko: '공보계정', en: 'Kung Pao chicken', ja: '宮保鶏丁（クンポウチキン）' },
+    price: '30,000',
+    imageUrl: 'https://picsum.photos/seed/gongbo/400/260',
+    desc: {
+      ko: '닭고기와 땅콩, 고추를 함께 볶은 매콤달콤한 궁보계 스타일 요리입니다.',
+      en: 'Stir-fried chicken with peanuts and chili peppers in a sweet-spicy sauce.',
+      ja: '鶏肉とピーナッツ、唐辛子を甘辛いソースで炒めた宮保鶏丁スタイルの一品です。'
+    }
+  },
+  {
+    id: 'dongpayuk',
+    name: { ko: '동파육', en: 'Dongpo braised pork belly', ja: '東坡肉' },
+    price: '38,000',
+    imageUrl: 'https://picsum.photos/seed/dongpayuk/400/260',
+    desc: {
+      ko: '두껍게 썬 삼겹살을 간장 양념에 오래 끓여낸 대표 중화요리입니다.',
+      en: 'Thick pork belly slowly braised in a rich soy-based sauce.',
+      ja: '厚切りの豚バラ肉を醤油ベースのタレでじっくり煮込んだ代表的な中華料理です。'
+    }
+  },
+  {
+    id: 'sanlatang',
+    name: { ko: '산라탕', en: 'Hot and sour soup', ja: 'サンラータン（酸辣湯）' },
+    price: '25,000',
+    imageUrl: 'https://picsum.photos/seed/sanlatang/400/260',
+    desc: {
+      ko: '식초와 후추 향이 어우러진 매콤새콤한 중국식 탕입니다.',
+      en: 'Chinese-style soup with a spicy and sour flavor from vinegar and pepper.',
+      ja: '酢と胡椒の香りがきいた、酸味と辛味のバランスが良い中華風スープです。'
+    }
+  },
+  {
+    id: 'corn-soup',
+    name: { ko: '계살옥수수스프', en: 'Chicken & corn soup', ja: '鶏肉コーンスープ' },
+    price: '28,000',
+    imageUrl: 'https://picsum.photos/seed/cornsoup/400/260',
+    desc: {
+      ko: '옥수수와 닭고기를 넣어 부드럽게 끓인 스프입니다.',
+      en: 'A mild, creamy soup with sweet corn and chicken.',
+      ja: 'スイートコーンと鶏肉を使ったまろやかなクリーム風スープです。'
+    }
+  },
+  {
+    id: 'samseon-tang',
+    name: { ko: '삼선탕', en: 'Seafood soup', ja: '三鮮スープ' },
+    price: '22,000',
+    imageUrl: 'https://picsum.photos/seed/samseontang/400/260',
+    desc: {
+      ko: '해산물을 듬뿍 넣어 끓인 맑은 스타일의 중국식 탕입니다.',
+      en: 'Clear Chinese-style soup with assorted seafood.',
+      ja: '海鮮をたっぷり使った、澄んだスープ仕立ての中華風三鮮スープです。'
+    }
+  }
+],
 
     // 4) 면·밥류
     meal: [
-      {
-        id: 'yuni-jjajang',
-        name: { ko: '유니자장면', en: 'Ground pork black bean noodles', ja: 'ユニジャージャー麺' },
-        price: '7,000',
-        imageUrl: 'https://picsum.photos/seed/yuni/400/260',
-        desc: {
-          ko: '잘게 간 고기를 넣은 부드러운 자장 소스의 면 요리입니다.',
-          en: 'Noodles in black bean sauce with finely ground pork.',
-          ja: ''
-        }
-      },
-      {
-        id: 'jjambbong',
-        name: { ko: '짬뽕', en: 'Spicy seafood noodle soup', ja: 'チャンポン' },
-        price: '8,000',
-        imageUrl: 'https://picsum.photos/seed/jjambbong/400/260',
-        desc: {
-          ko: '얼큰한 해산물 육수가 특징인 대표 짬뽕입니다.',
-          en: 'Noodles in a spicy seafood broth with vegetables.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gochu-jjambbong',
-        name: { ko: '고추짬뽕', en: 'Extra spicy jjambbong', ja: '唐辛子チャンポン' },
-        price: '9,000',
-        imageUrl: 'https://picsum.photos/seed/gochujjam/400/260',
-        desc: {
-          ko: '고추를 더해 더욱 매콤하게 즐기는 짬뽕입니다.',
-          en: 'Jjambbong made extra spicy with added chili peppers.',
-          ja: ''
-        }
-      },
-      {
-        id: 'samseon-jjambbong',
-        name: { ko: '삼선짬뽕', en: 'Deluxe seafood jjambbong', ja: '三鮮チャンポン' },
-        price: '10,000',
-        imageUrl: 'https://picsum.photos/seed/samseonjjambbong/400/260',
-        desc: {
-          ko: '해산물을 듬뿍 넣은 풍성한 삼선짬뽕입니다.',
-          en: 'Deluxe spicy noodle soup loaded with assorted seafood.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yuksong-jjambbong',
-        name: { ko: '육슬짬뽕', en: 'Beef jjambbong', ja: '牛肉チャンポン' },
-        price: '10,000',
-        imageUrl: 'https://picsum.photos/seed/yuksong/400/260',
-        desc: {
-          ko: '소고기를 넣어 진한 맛을 더한 짬뽕입니다.',
-          en: 'Spicy noodle soup made with beef and vegetables.',
-          ja: ''
-        }
-      },
-      {
-        id: 'samseon-jjajang',
-        name: { ko: '삼선자장', en: 'Deluxe seafood black bean noodles', ja: '三鮮ジャージャー麺' },
-        price: '10,000',
-        imageUrl: 'https://picsum.photos/seed/samseonjja/400/260',
-        desc: {
-          ko: '해산물이 들어간 풍성한 자장면입니다.',
-          en: 'Black bean noodles topped with assorted seafood.',
-          ja: ''
-        }
-      },
-      {
-        id: 'sacheon-tangmyeon',
-        name: { ko: '사천탕면', en: 'Sichuan-style spicy noodle soup', ja: '四川風タンメン' },
-        price: '10,000',
-        imageUrl: 'https://picsum.photos/seed/sacheonmyeon/400/260',
-        desc: {
-          ko: '사천식 매운 육수로 끓인 얼큰한 면 요리입니다.',
-          en: 'Noodles served in a spicy Sichuan-style broth.',
-          ja: ''
-        }
-      },
-      {
-        id: 'samseon-udon',
-        name: { ko: '삼선우동', en: 'Deluxe seafood udon', ja: '三鮮うどん' },
-        price: '10,000',
-        imageUrl: 'https://picsum.photos/seed/samseonudon/400/260',
-        desc: {
-          ko: '굵은 우동 면에 해산물을 얹은 따뜻한 국물요리입니다.',
-          en: 'Thick udon noodles in soup topped with assorted seafood.',
-          ja: ''
-        }
-      },
-      {
-        id: 'sin-ramyeon',
-        name: { ko: '신락면', en: 'Shin Ramyun', ja: '辛ラーメン' },
-        price: '11,000',
-        imageUrl: 'https://picsum.photos/seed/sinramyeon/400/260',
-        desc: {
-          ko: '',
-          en: '',
-          ja: ''
-        }
-      },
-      {
-        id: 'samseon-jjamban-jjajang',
-        name: { ko: '삼선쟁반자장', en: 'Seafood platter black bean noodles', ja: '三鮮大皿ジャージャー麺' },
-        price: '21,000',
-        imageUrl: 'https://picsum.photos/seed/jjamban/400/260',
-        desc: {
-          ko: '쟁반에 담아 여럿이 나눠 먹는 해물 자장면입니다.',
-          en: 'Large platter of black bean noodles with seafood for sharing.',
-          ja: ''
-        }
-      },
-      {
-        id: 'pork-fried-rice',
-        name: { ko: '돼지고기볶음밥', en: 'Pork fried rice', ja: '豚肉チャーハン' },
-        price: '8,000',
-        imageUrl: 'https://picsum.photos/seed/porkrice/400/260',
-        desc: {
-          ko: '돼지고기와 채소를 넣어 고슬고슬하게 볶은 볶음밥입니다.',
-          en: 'Fried rice with pork and vegetables.',
-          ja: ''
-        }
-      },
-      {
-        id: 'shrimp-fried-rice',
-        name: { ko: '새우볶음밥', en: 'Shrimp fried rice', ja: '海老チャーハン' },
-        price: '10,000',
-        imageUrl: 'https://picsum.photos/seed/shrimprice/400/260',
-        desc: {
-          ko: '탱글한 새우가 들어간 기본 볶음밥 메뉴입니다.',
-          en: 'Fried rice with plump shrimp and vegetables.',
-          ja: ''
-        }
-      },
-      {
-        id: 'chicken-fried-rice',
-        name: { ko: '계살볶음밥', en: 'Chicken fried rice', ja: '鶏肉チャーハン' },
-        price: '11,000',
-        imageUrl: 'https://picsum.photos/seed/chickenrice/400/260',
-        desc: {
-          ko: '닭고기를 듬뿍 넣어 볶아낸 볶음밥입니다.',
-          en: 'Fried rice generously topped with chicken pieces.',
-          ja: ''
-        }
-      },
-      {
-        id: 'gochujapchae-rice',
-        name: { ko: '고추잡채밥', en: 'Rice with spicy shredded pork & peppers', ja: 'ゴチュジャプチェ丼' },
-        price: '12,000',
-        imageUrl: 'https://picsum.photos/seed/gochujapchaerice/400/260',
-        desc: {
-          ko: '고추잡채를 밥 위에 올려 비벼 먹는 덮밥 스타일입니다.',
-          en: 'Rice bowl topped with spicy shredded pork and peppers.',
-          ja: ''
-        }
-      },
-      {
-        id: 'mapodubu-rice',
-        name: { ko: '마파두부밥', en: 'Mapo tofu rice', ja: '麻婆豆腐丼' },
-        price: '11,000',
-        imageUrl: 'https://picsum.photos/seed/maporice/400/260',
-        desc: {
-          ko: '매콤한 마파두부를 밥 위에 듬뿍 올린 덮밥입니다.',
-          en: 'Rice bowl topped with spicy mapo tofu.',
-          ja: ''
-        }
-      },
-      {
-        id: 'japtang-rice',
-        name: { ko: '잡탕밥', en: 'Mixed seafood & meat rice', ja: '雑湯丼' },
-        price: '17,000',
-        imageUrl: 'https://picsum.photos/seed/japtangrice/400/260',
-        desc: {
-          ko: '각종 해물과 고기를 걸쭉한 소스에 넣어 밥과 함께 즐기는 메뉴입니다.',
-          en: 'Rice topped with mixed seafood and meat in a thick savory sauce.',
-          ja: ''
-        }
-      },
-      {
-        id: 'yusanseul-rice',
-        name: { ko: '유산슬밥', en: 'Yusanseul rice', ja: 'ユサンスル丼' },
-        price: '17,000',
-        imageUrl: 'https://picsum.photos/seed/yusanseulrice/400/260',
-        desc: {
-          ko: '유산슬 요리를 밥 위에 올려 한 그릇으로 즐길 수 있는 메뉴입니다.',
-          en: 'Rice bowl topped with yusanseul (seafood and vegetables in thick sauce).',
-          ja: ''
-        }
-      }
-    ]
+  {
+    id: 'yuni-jjajang',
+    name: { ko: '유니자장면', en: 'Ground pork black bean noodles', ja: 'ユニジャージャー麺' },
+    price: '7,000',
+    imageUrl: 'https://picsum.photos/seed/yuni/400/260',
+    desc: {
+      ko: '잘게 간 고기를 넣은 부드러운 자장 소스의 면 요리입니다.',
+      en: 'Noodles in black bean sauce with finely ground pork.',
+      ja: '細かく挽いた肉入りのコクのある黒味噌ソースで仕上げた麺料理です。'
+    }
+  },
+  {
+    id: 'jjambbong',
+    name: { ko: '짬뽕', en: 'Spicy seafood noodle soup', ja: 'チャンポン' },
+    price: '8,000',
+    imageUrl: 'https://picsum.photos/seed/jjambbong/400/260',
+    desc: {
+      ko: '얼큰한 해산물 육수가 특징인 대표 짬뽕입니다.',
+      en: 'Noodles in a spicy seafood broth with vegetables.',
+      ja: '海鮮の旨味たっぷりのピリ辛スープで味わう定番チャンポンです。'
+    }
+  },
+  {
+    id: 'gochu-jjambbong',
+    name: { ko: '고추짬뽕', en: 'Extra spicy jjambbong', ja: '唐辛子チャンポン' },
+    price: '9,000',
+    imageUrl: 'https://picsum.photos/seed/gochujjam/400/260',
+    desc: {
+      ko: '고추를 더해 더욱 매콤하게 즐기는 짬뽕입니다.',
+      en: 'Jjambbong made extra spicy with added chili peppers.',
+      ja: '唐辛子を加えてさらに辛さを増した、刺激的なチャンポンです。'
+    }
+  },
+  {
+    id: 'samseon-jjambbong',
+    name: { ko: '삼선짬뽕', en: 'Deluxe seafood jjambbong', ja: '三鮮チャンポン' },
+    price: '10,000',
+    imageUrl: 'https://picsum.photos/seed/samseonjjambbong/400/260',
+    desc: {
+      ko: '해산물을 듬뿍 넣은 풍성한 삼선짬뽕입니다.',
+      en: 'Deluxe spicy noodle soup loaded with assorted seafood.',
+      ja: '海鮮をふんだんに使った具だくさんの三鮮チャンポンです。'
+    }
+  },
+  {
+    id: 'yuksong-jjambbong',
+    name: { ko: '육슬짬뽕', en: 'Beef jjambbong', ja: '牛肉チャンポン' },
+    price: '10,000',
+    imageUrl: 'https://picsum.photos/seed/yuksong/400/260',
+    desc: {
+      ko: '소고기를 넣어 진한 맛을 더한 짬뽕입니다.',
+      en: 'Spicy noodle soup made with beef and vegetables.',
+      ja: '牛肉の旨味を加えてコクを出したピリ辛チャンポンです。'
+    }
+  },
+  {
+    id: 'samseon-jjajang',
+    name: { ko: '삼선자장', en: 'Deluxe seafood black bean noodles', ja: '三鮮ジャージャー麺' },
+    price: '10,000',
+    imageUrl: 'https://picsum.photos/seed/samseonjja/400/260',
+    desc: {
+      ko: '해산물이 들어간 풍성한 자장면입니다.',
+      en: 'Black bean noodles topped with assorted seafood.',
+      ja: '海鮮具材をたっぷりのせた贅沢なジャージャー麺です。'
+    }
+  },
+  {
+    id: 'sacheon-tangmyeon',
+    name: { ko: '사천탕면', en: 'Sichuan-style spicy noodle soup', ja: '四川風タンメン' },
+    price: '10,000',
+    imageUrl: 'https://picsum.photos/seed/sacheonmyeon/400/260',
+    desc: {
+      ko: '사천식 매운 육수로 끓인 얼큰한 면 요리입니다.',
+      en: 'Noodles served in a spicy Sichuan-style broth.',
+      ja: '四川風の辛いスープで仕上げた、ピリ辛タンメン風の麺料理です。'
+    }
+  },
+  {
+    id: 'samseon-udon',
+    name: { ko: '삼선우동', en: 'Deluxe seafood udon', ja: '三鮮うどん' },
+    price: '10,000',
+    imageUrl: 'https://picsum.photos/seed/samseonudon/400/260',
+    desc: {
+      ko: '굵은 우동 면에 해산물을 얹은 따뜻한 국물요리입니다.',
+      en: 'Thick udon noodles in soup topped with assorted seafood.',
+      ja: '太めのうどんに海鮮具材をたっぷりのせた、温かいスープうどんです。'
+    }
+  },
+  {
+    id: 'sin-ramyeon',
+    name: { ko: '신락면', en: 'Shin Ramyun', ja: '辛ラーメン' },
+    price: '11,000',
+    imageUrl: 'https://picsum.photos/seed/sinramyeon/400/260',
+    desc: {
+      ko: '한국을 대표하는 인스턴트 라면을 식당 스타일로 즐길 수 있는 메뉴입니다.',
+      en: 'Korea’s iconic instant ramen served restaurant-style.',
+      ja: '韓国を代表するインスタントラーメンをお店仕立てで楽しめる一品です。'
+    }
+  },
+  {
+    id: 'samseon-jjamban-jjajang',
+    name: { ko: '삼선쟁반자장', en: 'Seafood platter black bean noodles', ja: '三鮮大皿ジャージャー麺' },
+    price: '21,000',
+    imageUrl: 'https://picsum.photos/seed/jjamban/400/260',
+    desc: {
+      ko: '쟁반에 담아 여럿이 나눠 먹는 해물 자장면입니다.',
+      en: 'Large platter of black bean noodles with seafood for sharing.',
+      ja: '大皿に盛り付けた海鮮ジャージャー麺で、皆で取り分けて楽しめます。'
+    }
+  },
+  {
+    id: 'pork-fried-rice',
+    name: { ko: '돼지고기볶음밥', en: 'Pork fried rice', ja: '豚肉チャーハン' },
+    price: '8,000',
+    imageUrl: 'https://picsum.photos/seed/porkrice/400/260',
+    desc: {
+      ko: '돼지고기와 채소를 넣어 고슬고슬하게 볶은 볶음밥입니다.',
+      en: 'Fried rice with pork and vegetables.',
+      ja: '豚肉と野菜を加えてパラパラに炒めたチャーハンです。'
+    }
+  },
+  {
+    id: 'shrimp-fried-rice',
+    name: { ko: '새우볶음밥', en: 'Shrimp fried rice', ja: '海老チャーハン' },
+    price: '10,000',
+    imageUrl: 'https://picsum.photos/seed/shrimprice/400/260',
+    desc: {
+      ko: '탱글한 새우가 들어간 기본 볶음밥 메뉴입니다.',
+      en: 'Fried rice with plump shrimp and vegetables.',
+      ja: 'プリッとしたエビと野菜が入った定番のエビチャーハンです。'
+    }
+  },
+  {
+    id: 'chicken-fried-rice',
+    name: { ko: '계살볶음밥', en: 'Chicken fried rice', ja: '鶏肉チャーハン' },
+    price: '11,000',
+    imageUrl: 'https://picsum.photos/seed/chickenrice/400/260',
+    desc: {
+      ko: '닭고기를 듬뿍 넣어 볶아낸 볶음밥입니다.',
+      en: 'Fried rice generously topped with chicken pieces.',
+      ja: '鶏肉をたっぷり使って炒めたボリューム満点のチャーハンです。'
+    }
+  },
+  {
+    id: 'gochujapchae-rice',
+    name: { ko: '고추잡채밥', en: 'Rice with spicy shredded pork & peppers', ja: 'ゴチュジャプチェ丼' },
+    price: '12,000',
+    imageUrl: 'https://picsum.photos/seed/gochujapchaerice/400/260',
+    desc: {
+      ko: '고추잡채를 밥 위에 올려 비벼 먹는 덮밥 스타일입니다.',
+      en: 'Rice bowl topped with spicy shredded pork and peppers.',
+      ja: 'ピリ辛の豚肉とピーマン炒め（ゴチュジャプチェ）をご飯の上にのせた丼スタイルです。'
+    }
+  },
+  {
+    id: 'mapodubu-rice',
+    name: { ko: '마파두부밥', en: 'Mapo tofu rice', ja: '麻婆豆腐丼' },
+    price: '11,000',
+    imageUrl: 'https://picsum.photos/seed/maporice/400/260',
+    desc: {
+      ko: '매콤한 마파두부를 밥 위에 듬뿍 올린 덮밥입니다.',
+      en: 'Rice bowl topped with spicy mapo tofu.',
+      ja: '辛味のきいた麻婆豆腐をご飯にたっぷりかけた丼ぶりです。'
+    }
+  },
+  {
+    id: 'japtang-rice',
+    name: { ko: '잡탕밥', en: 'Mixed seafood & meat rice', ja: '雑湯丼' },
+    price: '17,000',
+    imageUrl: 'https://picsum.photos/seed/japtangrice/400/260',
+    desc: {
+      ko: '각종 해물과 고기를 걸쭉한 소스에 넣어 밥과 함께 즐기는 메뉴입니다.',
+      en: 'Rice topped with mixed seafood and meat in a thick savory sauce.',
+      ja: 'さまざまな海鮮と肉をとろみのある香ばしいソースで仕上げ、ご飯にかけた丼メニューです。'
+    }
+  },
+  {
+    id: 'yusanseul-rice',
+    name: { ko: '유산슬밥', en: 'Yusanseul rice', ja: 'ユサンスル丼' },
+    price: '17,000',
+    imageUrl: 'https://picsum.photos/seed/yusanseulrice/400/260',
+    desc: {
+      ko: '유산슬 요리를 밥 위에 올려 한 그릇으로 즐길 수 있는 메뉴입니다.',
+      en: 'Rice bowl topped with yusanseul (seafood and vegetables in thick sauce).',
+      ja: '海鮮と野菜のとろみ炒め（ユサンスル）をご飯にのせて一皿で楽しめる丼です。'
+    }
+  }
+]
   }
 };
