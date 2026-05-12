@@ -66,6 +66,13 @@
       height: 25px;
       border-radius: 10px;
       background: conic-gradient(from 180deg at 50% 50%, #33c5d1, #01696f, #2b8790);
+      overflow: hidden;
+    }
+    .logo-mark img {
+      width: 110%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10%;
     }
     .lang-selector {
       display: flex;
@@ -186,6 +193,24 @@
       margin-top: 4px;
     }
 
+    /* ===== Category filter ===== */
+    .category-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .category-filter-select {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      background: #fff;
+      box-shadow: var(--shadow-card);
+    }
+
     /* ===== Category & cards ===== */
     .category-section { margin-top: 18px; }
     .category-title {
@@ -272,13 +297,10 @@
 <body>
   <header>
     <button class="logo" id="secretAdminTrigger" type="button" aria-label="다국어 메뉴판">
-  <div class="logo-mark" aria-hidden="true">
-    <img src="photo/logo.jpeg" 
-         alt="신락원 로고" 
-         style="width:110%; height:auto; object-fit:cover; border-radius:10%;">
-  </div>
- 
-</button>
+      <div class="logo-mark" aria-hidden="true">
+        <img src="photo/logo.jpeg" alt="신락원 로고">
+      </div>
+    </button>
     <div class="lang-selector" role="group" aria-label="언어 선택">
       <button class="lang-btn" data-lang="ko" aria-pressed="true">🇰🇷 한국어</button>
       <button class="lang-btn" data-lang="en" aria-pressed="false">🇺🇸 English</button>
@@ -308,6 +330,16 @@
       </div>
     </section>
 
+    <!-- 카테고리 선택 영역 -->
+    <section aria-label="카테고리 선택" style="margin-bottom: 4px;">
+      <div class="category-filter-row">
+        <span id="categoryLabel">카테고리 선택</span>
+        <select id="categoryFilter" class="category-filter-select">
+          <option value="all">전체 보기</option>
+        </select>
+      </div>
+    </section>
+
     <div id="menuContainer" aria-live="polite"></div>
   </main>
 
@@ -331,7 +363,9 @@
         noticeText: '※ 화면에 보이는 메뉴는 샘플 데이터이며, 실제 매장 상황에 맞게 구성할 수 있습니다.',
         overlay: '언어를 선택해보세요',
         langLabel: '현재 언어 기준 설명',
-        priceUnit: '원'
+        priceUnit: '원',
+        categoryLabel: '카테고리 선택',
+        categoryAll: '전체 보기'
       },
       en: {
         subtitle: 'A digital menu that lets guests view dishes in the language they feel most comfortable with.',
@@ -342,7 +376,9 @@
         noticeText: '* The menu items are sample data. You can customize them for your store.',
         overlay: 'Tap a card to see details',
         langLabel: 'Description in selected language',
-        priceUnit: ' KRW'
+        priceUnit: ' KRW',
+        categoryLabel: 'Select category',
+        categoryAll: 'Show all'
       },
       ja: {
         subtitle: 'お客様が一番読みやすい言語でメニューを確認できるデジタルメニューです。',
@@ -353,12 +389,17 @@
         noticeText: '※ 表示されているメニューはサンプルです。店舗に合わせて自由に編集できます。',
         overlay: '言語を切り替えてみましょう',
         langLabel: '選択した言語での説明',
-        priceUnit: ' KRW'
+        priceUnit: ' KRW',
+        categoryLabel: 'カテゴリを選択',
+        categoryAll: 'すべて表示'
       }
     };
 
     // 상태: 현재 언어
     let currentLang = 'ko';
+
+    // 상태: 현재 선택된 카테고리 (all = 전체)
+    let currentCategoryId = 'all';
 
     // 메뉴 데이터: 서버 API 우선, 실패하면 menu-data.js 의 기본 데이터 사용.
     let menuData = window.menuData || { categories: [], menu: {} };
@@ -368,6 +409,7 @@
     // DOM refs
     const langButtons = document.querySelectorAll('.lang-btn');
     const menuContainer = document.getElementById('menuContainer');
+    const categoryFilter = document.getElementById('categoryFilter');
 
     // 로컬에서는 같은 origin, 배포 환경에서는 Perplexity 포트 프록시를 사용.
     const API_BASE = location.hostname === 'localhost' || location.protocol === 'file:'
@@ -412,6 +454,35 @@
       document.getElementById('pill3').textContent = t.pill3;
       document.getElementById('noticeText').textContent = t.noticeText;
       document.getElementById('heroOverlayText').textContent = t.overlay;
+
+      const categoryLabelEl = document.getElementById('categoryLabel');
+      if (categoryLabelEl) {
+        categoryLabelEl.textContent = t.categoryLabel;
+      }
+    }
+
+    /** 카테고리 선택창 옵션 채우기 */
+    function populateCategoryFilter() {
+      if (!categoryFilter) return;
+      const t = i18nTexts[currentLang];
+
+      // 기본 옵션(전체 보기)부터 다시 구성
+      categoryFilter.innerHTML = '';
+      const allOption = document.createElement('option');
+      allOption.value = 'all';
+      allOption.textContent = t.categoryAll;
+      categoryFilter.appendChild(allOption);
+
+      // menuData.categories 기반 옵션 추가
+      menuData.categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.id;
+        opt.textContent = pickLang(cat.name, currentLang);
+        categoryFilter.appendChild(opt);
+      });
+
+      // 현재 선택 유지
+      categoryFilter.value = currentCategoryId || 'all';
     }
 
     /** 카테고리 + 카드 모두 렌더 */
@@ -419,7 +490,12 @@
       menuContainer.innerHTML = '';
       const t = i18nTexts[currentLang];
 
-      menuData.categories.forEach(cat => {
+      // 현재 선택에 따라 렌더할 카테고리 목록 결정
+      const categoriesToRender = currentCategoryId === 'all'
+        ? menuData.categories
+        : menuData.categories.filter(cat => cat.id === currentCategoryId);
+
+      categoriesToRender.forEach(cat => {
         const items = menuData.menu[cat.id] || [];
         if (items.length === 0) return; // 빈 카테고리는 스킵
 
@@ -467,7 +543,6 @@
       img.src = item.imageUrl || PLACEHOLDER;
       img.alt = displayName;
       img.loading = 'lazy';
-      // 이미지 로드 실패시 placeholder 로 폴백
       img.addEventListener('error', () => { img.src = PLACEHOLDER; }, { once: true });
 
       // 본문
@@ -509,6 +584,7 @@
         b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
       renderTexts();
+      populateCategoryFilter(); // 언어 바뀌면 옵션 라벨도 갱신
       renderMenu();
     }
 
@@ -516,9 +592,17 @@
       btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
     });
 
+    // 카테고리 선택 변경
+    if (categoryFilter) {
+      categoryFilter.addEventListener('change', () => {
+        currentCategoryId = categoryFilter.value;
+        renderMenu();
+      });
+    }
+
     /**
      * 숨은 관리자 진입:
-     * 로고의 "다국어 메뉴판" 영역을 짧은 시간 안에 5번 누르면 admin.html 로 이동.
+     * 로고 영역을 짧은 시간 안에 5번 누르면 admin.html 로 이동.
      */
     let secretClickCount = 0;
     let secretClickTimer = null;
@@ -534,336 +618,9 @@
     // 초기 렌더
     loadMenuData().then(() => {
       renderTexts();
+      populateCategoryFilter();
       renderMenu();
     });
   </script>
-<script data-pplx-inline-edit>
-(function () {
-  if (window === window.top) return;
-
-  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
-  const MAX_FONT_BYTES = 500 * 1024;
-  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
-  let scrollForwarding = false;
-  let scrollRaf = 0;
-  let trustedTopOrigin = null;
-
-  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
-  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
-  // across multiple labels.
-  function matchesAllowedOrigin(origin) {
-    if (!origin) return false;
-    for (const entry of allowedParentOrigins) {
-      if (!entry.includes("*")) {
-        if (entry === origin) return true;
-        continue;
-      }
-      const pattern = new RegExp(
-        "^" +
-          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
-          "$",
-      );
-      if (pattern.test(origin)) return true;
-    }
-    return false;
-  }
-
-  // Trust decision: when the sender is same-origin-visible (event.origin is a
-  // real origin like https://www.perplexity.ai) we trust event.origin directly.
-  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
-  // broker's stamped `parentOrigin` to identify the top window. The fallback
-  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
-  // on the response path (see postToTrustedTop) to ensure replies can't be
-  // delivered to anyone but the actual top window of that claimed origin.
-  function getTrustedParentOrigin(event) {
-    const forwardedParentOrigin =
-      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
-    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
-    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
-  }
-
-  // All responses go to window.top with targetOrigin = the allowlisted origin.
-  // An attacker that iframes us inside their own null-origin broker can claim
-  // any parentOrigin they like, but the browser will drop the reply whenever
-  // the real top's origin doesn't match — so the screenshot never leaves.
-  function postToTrustedTop(message) {
-    if (!trustedTopOrigin) return;
-    try {
-      window.top.postMessage(message, trustedTopOrigin);
-    } catch (_error) {}
-  }
-
-  function inlineAll(original, clone) {
-    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
-
-    try {
-      const computedStyle = getComputedStyle(original);
-      // cssText on a computed style is the serialized declaration in modern
-      // Chromium/Safari — a single read beats enumerating ~400 longhand
-      // properties. Firefox returns "" here, so we fall back on empty.
-      const serialized = computedStyle.cssText;
-      if (serialized) {
-        clone.style.cssText = serialized;
-      } else {
-        const parts = new Array(computedStyle.length);
-        for (let index = 0; index < computedStyle.length; index += 1) {
-          const property = computedStyle[index];
-          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
-        }
-        clone.style.cssText = parts.join("");
-      }
-    } catch (_error) {}
-
-    const originalChildren = original.children;
-    const clonedChildren = clone.children;
-    for (
-      let index = 0;
-      index < originalChildren.length && index < clonedChildren.length;
-      index += 1
-    ) {
-      inlineAll(originalChildren[index], clonedChildren[index]);
-    }
-  }
-
-  function extractFontUrl(srcValue) {
-    const matches = [
-      ...srcValue.matchAll(
-        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
-      ),
-    ];
-    if (matches.length === 0) return null;
-    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
-    if (woff2) return woff2[1];
-    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
-    if (woff) return woff[1];
-    return matches[0][1];
-  }
-
-  // Cache resolved font URL -> data URI across captures. Fonts on a page
-  // essentially never change, and a batch run emits multiple captures back to
-  // back — without this we'd refetch + re-base64 every time.
-  const fontDataUriCache = new Map();
-  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
-
-  async function fetchAsDataUri(url) {
-    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
-    let dataUri = null;
-    try {
-      const response = await fetch(url, { mode: "cors", credentials: "omit" });
-      if (response.ok) {
-        const blob = await response.blob();
-        if (blob.size <= MAX_FONT_BYTES) {
-          dataUri = await new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onloadend = () =>
-              resolve(typeof reader.result === "string" ? reader.result : null);
-            reader.onerror = () => resolve(null);
-            reader.readAsDataURL(blob);
-          });
-        }
-      }
-    } catch (_error) {
-      dataUri = null;
-    }
-    fontDataUriCache.set(url, dataUri);
-    return dataUri;
-  }
-
-  function collectFontFaceRuleTexts() {
-    const rules = [];
-    for (const sheet of document.styleSheets) {
-      let cssRules;
-      try {
-        cssRules = sheet.cssRules;
-      } catch (_error) {
-        continue;
-      }
-      if (!cssRules) continue;
-      for (const rule of cssRules) {
-        const cssText = rule.cssText || "";
-        if (cssText.startsWith("@font-face")) rules.push(cssText);
-      }
-    }
-    return rules;
-  }
-
-  async function buildInlinedFontCss() {
-    const ruleTexts = collectFontFaceRuleTexts();
-    if (ruleTexts.length === 0) return null;
-
-    const resolved = ruleTexts.map((cssText) => {
-      if (!SRC_DECLARATION_RE.test(cssText)) return null;
-      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
-      if (!srcMatch) return null;
-      const url = extractFontUrl(srcMatch[1]);
-      if (!url) return null;
-      try {
-        return { cssText, url: new URL(url, document.baseURI).href };
-      } catch (_error) {
-        return null;
-      }
-    });
-
-    const dataUris = await Promise.all(
-      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
-    );
-
-    const inlined = [];
-    let totalBytes = 0;
-    for (let index = 0; index < resolved.length; index += 1) {
-      const entry = resolved[index];
-      const dataUri = dataUris[index];
-      if (!entry || !dataUri) continue;
-      const approxBytes = dataUri.length * 0.75;
-      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
-      totalBytes += approxBytes;
-      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
-    }
-    return inlined.length > 0 ? inlined.join("\n") : null;
-  }
-
-  function stripExternal(clone) {
-    const images = clone.querySelectorAll("img");
-    for (let index = 0; index < images.length; index += 1) {
-      const src = images[index].getAttribute("src");
-      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
-    }
-
-    const elements = clone.querySelectorAll("*");
-    for (let index = 0; index < elements.length; index += 1) {
-      const style = elements[index].style.cssText;
-      if (style && style.includes("url(")) {
-        elements[index].style.cssText = style.replace(
-          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
-          "none",
-        );
-      }
-    }
-  }
-
-  function emitScroll() {
-    scrollRaf = 0;
-    if (!scrollForwarding) return;
-    postToTrustedTop({
-      type: "INLINE_EDIT_SCROLL",
-      scrollX: window.scrollX,
-      scrollY: window.scrollY,
-    });
-  }
-
-  window.addEventListener(
-    "scroll",
-    function () {
-      if (!scrollForwarding || scrollRaf) return;
-      scrollRaf = requestAnimationFrame(emitScroll);
-    },
-    { passive: true, capture: true },
-  );
-
-  async function handleCaptureRequest(event) {
-    const requestId = event.data.requestId;
-    const scrollX = window.scrollX;
-    const scrollY = window.scrollY;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    function postResult(dataUrl) {
-      postToTrustedTop({
-        type: "INLINE_EDIT_SCREENSHOT_RESULT",
-        requestId,
-        dataUrl,
-        scrollX,
-        scrollY,
-      });
-    }
-
-    try {
-      // Wait for any pending web fonts to resolve so both inline metrics and
-      // the @font-face inlining below see the same loaded faces.
-      if (document.fonts && document.fonts.ready) {
-        try {
-          await document.fonts.ready;
-        } catch (_error) {}
-      }
-
-      const clone = document.documentElement.cloneNode(true);
-      inlineAll(document.documentElement, clone);
-
-      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
-      for (let index = 0; index < removedNodes.length; index += 1) {
-        removedNodes[index].remove();
-      }
-
-      stripExternal(clone);
-
-      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
-      // can resolve them — external font URLs aren't fetched during
-      // foreignObject rendering, which would otherwise force a fallback face
-      // and change text metrics.
-      const inlinedFontCss = await buildInlinedFontCss();
-      if (inlinedFontCss) {
-        const styleEl = document.createElement("style");
-        styleEl.textContent = inlinedFontCss;
-        const head = clone.querySelector("head");
-        if (head) head.appendChild(styleEl);
-        else clone.insertBefore(styleEl, clone.firstChild);
-      }
-
-      const html = new XMLSerializer().serializeToString(clone);
-      const svg =
-        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
-        '<foreignObject width="100%" height="100%">' +
-        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
-        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
-        html +
-        "</div></div></foreignObject></svg>";
-      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-      const image = new Image();
-      image.onload = function () {
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
-        postResult(canvas.toDataURL("image/png"));
-      };
-      image.onerror = function () {
-        postResult(null);
-      };
-      image.src = svgUrl;
-    } catch (_error) {
-      postResult(null);
-    }
-  }
-
-  window.addEventListener("message", function (event) {
-    if (!event.data) return;
-    // Only accept messages from the direct parent frame. Blocks sibling /
-    // unrelated-window postMessage senders that could otherwise reach us.
-    if (event.source !== window.parent) return;
-
-    const trustedParentOrigin = getTrustedParentOrigin(event);
-    if (!trustedParentOrigin) return;
-    trustedTopOrigin = trustedParentOrigin;
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
-      scrollForwarding = true;
-      emitScroll();
-      return;
-    }
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
-      scrollForwarding = false;
-      if (scrollRaf) cancelAnimationFrame(scrollRaf);
-      scrollRaf = 0;
-      return;
-    }
-
-    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
-
-    handleCaptureRequest(event);
-  });
-})();
-
-
-</script></body>
+</body>
 </html>
